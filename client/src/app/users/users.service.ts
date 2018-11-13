@@ -5,14 +5,24 @@ import {User, Student, Teacher} from '../shared/user.model';
 
 @Injectable()
 export class UsersService {
-  data;
-  teachers: Teacher[];
-  students: Student[];
+  data: {};
+  teachers: Teacher[] = [];
+  students: Student[] = [];
 
   constructor(private httpService: HttpService) {
-    console.log('UsersService');
-    this.httpService.getUsers().subscribe(data => this.data = data);
+    this.httpService.getUsers().subscribe(data => {
+      this.data = data;
+      this.teachers.push(...data['teachers'].map((teacher) => {
+        return new Teacher(teacher);
+      }));
+      this.students.push(...data['students'].map((students) => {
+        return new Student(students);
+      }));
+    });
+
   }
+
+
 
 
 }

@@ -13,7 +13,7 @@ export class HttpService {
 
   }
 
-  getUsers()/* : Observable: User[] */ {
+  getUsers(): Observable<{}>  {
     return this.http.get('http://localhost:5000/api/data/users').pipe(map(data => {
       return data;
     }));

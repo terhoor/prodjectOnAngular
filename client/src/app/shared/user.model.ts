@@ -10,7 +10,7 @@ export class User {
 
 export class Student extends User {
   group: number;
-  roles: [];
+  roles: [string];
   subjects: {};
   constructor(
     objStudents
@@ -28,8 +28,8 @@ export class Student extends User {
 }
 
 export class Teacher extends User {
-  groups: [];
-  roles: [];
+  groups: [number];
+  roles: [string];
   subjects: string;
 
   constructor(
