@@ -1,6 +1,6 @@
 export class User {
   constructor(
-      /* readonly id: number, */
+      readonly id: number,
       public lastName,
       public firstName,
       public patronymic) {
@@ -15,7 +15,7 @@ export class Student extends User {
   constructor(
     objStudents
       ) {
-        super(/* objStudents.id, */
+        super(objStudents.id,
           objStudents.lastName,
           objStudents.firstName,
           objStudents.patronymic
@@ -35,7 +35,7 @@ export class Teacher extends User {
   constructor(
       objTeacher
       ) {
-        super(/* objTeacher.id, */
+        super(objTeacher.id,
           objTeacher.lastName,
           objTeacher.firstName,
           objTeacher.patronymic

@@ -1,2 +1,13 @@
-<h1>Hi!</h1>
-<app-users></app-users>
+<!-- <h1>Hi!</h1> -->
+
+<!-- <app-home-page></app-home-page> -->
+
+<nav mat-tab-nav-bar>
+    <a mat-tab-link *ngFor="let item of links; let i = index"
+       [routerLink]="item.link"
+       routerLinkActive="active"
+       > {{item.name}} </a>
+  </nav>
+
+
+  <router-outlet></router-outlet>

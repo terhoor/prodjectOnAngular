@@ -9,6 +9,21 @@ import { HttpService } from './users/http.service';
 export class AppComponent {
   title = 'client';
 
+  links = [
+    {
+      name: 'Главная',
+      link: '/'
+    }, {
+      name: 'Личный кабинет',
+      link: '/personal-area'
+    }, {
+      name: 'Список пользователей',
+      link: '/list-users'
+    },
+
+];
+
+
   constructor() {
     
   }
