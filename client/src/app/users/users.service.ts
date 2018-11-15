@@ -2,20 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 
 import {User, Student, Teacher} from '../shared/user.model';
-import { Subject  } from 'rxjs';
+import { ReplaySubject  } from 'rxjs';
 
 
 @Injectable()
 export class UsersService {
   data: {};
-  teachers: Subject<Teacher[]>;
-  students: Subject<Student[]>;
-  users: Subject<User[]>;
+  teachers: ReplaySubject<Teacher[]>;
+  students: ReplaySubject<Student[]>;
+  users: ReplaySubject<User[]>;
 
   constructor(private httpService: HttpService) {
-    this.teachers = new Subject();
-    this.students = new Subject();
-    this.users = new Subject();
+    this.teachers = new ReplaySubject();
+    this.students = new ReplaySubject();
+    this.users = new ReplaySubject();
 
     this.httpService.getUsers().subscribe(data => {
       this.data = data;
