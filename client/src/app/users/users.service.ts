@@ -18,9 +18,9 @@ export class UsersService {
   };
 
   constructor(private httpService: HttpService) {
-    this.teachers = new BehaviorSubject();
-    this.students = new BehaviorSubject();
-    this.users = new BehaviorSubject();
+    this.teachers = new BehaviorSubject([]);
+    this.students = new BehaviorSubject([]);
+    this.users = new BehaviorSubject([]);
 
 
     this.httpService.getUsers().subscribe(data => {
