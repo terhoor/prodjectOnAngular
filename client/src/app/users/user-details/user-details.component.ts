@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {User} from '../../shared/user.model';
+import { ActivatedRoute } from '@angular/router';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-user-details',
@@ -7,10 +9,14 @@ import {User} from '../../shared/user.model';
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
-  @Input() user: User;
-  constructor() { }
+  id: number;
+  user;
+  userIs;
+  constructor(private route: ActivatedRoute, private usersService: UsersService) { }
 
   ngOnInit() {
+    this.id = Number(this.route.snapshot.params['id']);
+    this.user = this.usersService.getUser(this.id);
   }
 
 }

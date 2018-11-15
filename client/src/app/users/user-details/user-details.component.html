@@ -1,2 +1,8 @@
 <h2>Информация о пользователе</h2>
-<div>{{user.lastName}} {{user.firstName}}</div>
+<!-- <div>{{user.lastName}} {{user.firstName}}</div> -->
+
+<div>{{user.lastName}} {{user.firstName}} {{user.patronymic}}</div>
+<div *ngFor="let role of user.roles">
+  <span>{{role}} </span> 
+</div>
+

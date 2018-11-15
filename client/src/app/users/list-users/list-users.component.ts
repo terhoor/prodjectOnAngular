@@ -21,15 +21,12 @@ export class ListUsersComponent implements OnInit, OnDestroy {
     console.log('создание');
     this.data = this.usersService.users.subscribe((value) => {
       this.users = value;
-      console.log('создание слушателя', value);
     });
+    // this.users = this.usersService.users.value;
   }
 
   ngOnDestroy() {
     // this.data.unsubscribe();
-    // console.log('уничтожение');
-    // console.log(this.data);
-
 
   }
 
