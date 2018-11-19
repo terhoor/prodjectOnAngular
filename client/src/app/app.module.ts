@@ -2,18 +2,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HttpService } from './users/http.service';
-import { UsersService } from './users/users.service';
+import { UsersService } from './shared/services/users.service';
 import { HttpClientModule  } from '@angular/common/http';
 import { MaterialModule } from './material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { PersonalAreaComponent } from './users/personal-area/personal-area.component';
 import { ListUsersComponent } from './users/list-users/list-users.component';
-import { ListGroupComponent } from './users/list-group/list-group.component';
+import { ListGroupComponent } from './groups/list-group/list-group.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
+import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
+import { AuthService } from './shared/services/auth.service';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { GroupDetailsComponent } from './groups/group-details/group-details.component';
+import { LoaderComponent } from './shared/components/loader/loader.component';
+
 
 
 
@@ -22,11 +27,14 @@ import { AppRoutingModule } from './app-routing.module';
   declarations: [
     AppComponent,
     LoginPageComponent,
-    PersonalAreaComponent,
     ListUsersComponent,
     ListGroupComponent,
     UserDetailsComponent,
-    HomePageComponent
+    HomePageComponent,
+    AuthLayoutComponent,
+    SiteLayoutComponent,
+    GroupDetailsComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,8 +42,10 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [HttpService, UsersService],
+  providers: [UsersService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

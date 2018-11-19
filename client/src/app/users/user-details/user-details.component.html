@@ -1,8 +1,12 @@
 <h2>Информация о пользователе</h2>
-<!-- <div>{{user.lastName}} {{user.firstName}}</div> -->
 
-<div>{{user.lastName}} {{user.firstName}} {{user.patronymic}}</div>
-<div *ngFor="let role of user.roles">
-  <span>{{role}} </span> 
+<div *ngIf="user; else loader">
+  <div>{{user.lastName}} {{user.firstName}} {{user.patronymic}}</div>
+<div>
+  <span>{{user.roles}}</span> 
+</div>
 </div>
 
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

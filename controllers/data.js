@@ -1,29 +1,48 @@
-const errorHandler = require('../utils/errorHandler')
-const db = require('../shared/db.json')
-const fs = require('fs')
+const errorHandler = require('../utils/errorHandler');
+const db = require('../shared/db.json');
+const fs = require('fs');
 
 module.exports.getData = function(req, res) {
   try {
-      res.status(200).json(db)
+      res.status(200).json(db);
   } catch(e) {
       errorHandler(res, e);
   }
-}
+};
 
-/* module.exports.getTeachers = function(req, res) {
-    try {
-      let teachers = db['teachers']
-        res.status(200).json(teachers)
-    } catch(e) {
-        errorHandler(res, e);
-    }
-}
-
-module.exports.getStudents = function(req, res) {
+module.exports.getUserId = async function(req, res) {
   try {
-    let students = db['students']
-      res.status(200).json(students)
+    const id = req.params.id;
+    const user = await function() {
+      const arrayUsers = [...db.students, ...db.teachers];
+      return arrayUsers.find((user) => {
+        if (user.id.toString() === id) {
+          return true;
+        }
+        return false;
+      })
+    }();
+
+    res.status(200).json(user);
   } catch(e) {
-      errorHandler(res, e);
+    errorHandler(res, e);
   }
-} */
+}
+
+module.exports.getByGroupName = async function(req, res) {
+  try {
+    const nameGroup = req.body;
+    const groupArr = await function() {
+      const arrayUsers = [...db.students];
+      return arrayUsers.filter((user) => {
+        if (user.groups === nameGroup.name) {
+          return true;
+        }
+        return false;
+      })
+    }();
+    res.status(200).json(groupArr);
+  } catch(e) {
+    errorHandler(res, e);
+  }
+}

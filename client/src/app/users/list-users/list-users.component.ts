@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 
 import {User} from '../../shared/user.model';
-import { UsersService } from '../users.service';
+import { UsersService } from '../../shared/services/users.service';
 
 @Component({
   selector: 'app-list-users',
@@ -9,24 +9,19 @@ import { UsersService } from '../users.service';
   styleUrls: ['./list-users.component.css']
 })
 export class ListUsersComponent implements OnInit, OnDestroy {
-  users: User[] = [];
-  dataSource;
+  users: User[];
   displayedColumns: string[] = ['id', 'lastName', 'firstName', 'patronymic', 'roles'];
-  data;
+  users$;
   constructor(private usersService: UsersService) {
 
   }
 
   ngOnInit() {
     console.log('создание');
-    this.data = this.usersService.users.subscribe((value) => {
-      this.users = value;
-    });
-    // this.users = this.usersService.users.value;
+    this.users$ = this.usersService.users;
   }
 
   ngOnDestroy() {
-    // this.data.unsubscribe();
 
   }
 

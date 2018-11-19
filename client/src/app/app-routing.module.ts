@@ -2,14 +2,26 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListUsersComponent } from './users/list-users/list-users.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { PersonalAreaComponent } from './users/personal-area/personal-area.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
+import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
+import { ListGroupComponent } from './groups/list-group/list-group.component';
+import { GroupDetailsComponent } from './groups/group-details/group-details.component';
 
 const appRoutes: Routes = [
-  {path: 'list-users', component: ListUsersComponent},
-  {path: 'list-users/:id', component: UserDetailsComponent},
-  {path: 'personal-area', component: PersonalAreaComponent},
-  {path: '', component: HomePageComponent}
+  // {path: '', component: AuthLayoutComponent, children: [
+    // {path: '', redirectTo: '/login', pathMatch: 'full'},
+    // {path: 'login', component: LoginPageComponent},
+  // ]},
+  {path: '', component: SiteLayoutComponent, children: [
+    {path: 'home', component: HomePageComponent},
+    {path: 'users-list', component: ListUsersComponent},
+    {path: 'detail-user/:id', component: UserDetailsComponent},
+    {path: 'users-group', component: ListGroupComponent},
+    {path: 'details-group/:name', component: GroupDetailsComponent},
+  ]},
+  {path: '**', redirectTo: '/login'}
 
 ];
 

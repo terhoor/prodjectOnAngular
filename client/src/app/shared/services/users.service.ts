@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from './http.service';
 
-import {User, Student, Teacher} from '../shared/user.model';
-import { BehaviorSubject  } from 'rxjs';
+import {User, Student, Teacher} from '../user.model';
+import { BehaviorSubject, Observable  } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
@@ -11,19 +12,21 @@ export class UsersService {
   teachers: BehaviorSubject<Teacher[]>;
   students: BehaviorSubject<Student[]>;
   users: BehaviorSubject<User[]>;
+  groups: BehaviorSubject<string[]>;
   userIs = {
     'Студент': false,
     'Преподаватель': false,
     'Админ': false
   };
 
-  constructor(private httpService: HttpService) {
+  constructor(private http: HttpClient) {
     this.teachers = new BehaviorSubject([]);
     this.students = new BehaviorSubject([]);
     this.users = new BehaviorSubject([]);
+    this.groups = new BehaviorSubject([]);
 
 
-    this.httpService.getUsers().subscribe(data => {
+    this.getUsers().subscribe(data => {
       this.data = data;
       const users = [];
 
@@ -35,25 +38,39 @@ export class UsersService {
         return new Student(student);
       });
 
+      const groups = data['groups'];
+
       users.push(...teachers);
       users.push(...students);
       this.teachers.next(teachers);
       this.students.next(students);
       this.users.next(users);
-      // this.teachers.push(...data['teachers'].map((teacher) => {
-      //   return new Teacher(teacher);
-      // }));
-      // this.students.push(...data['students'].map((students) => {
-      //   return new Student(students);
-      // }));
-      // this.users.push(...this.teachers, ...this.students);
+      this.groups.next(groups);
 
     });
 
   }
 
+  getUsers(): Observable<{}>  {
+    return this.http.get('http://localhost:5000/api/data/users').pipe(map(data => {
+      return data;
+    }));
+  }
+
+  getById(id): Observable<User>  {
+    return this.http.get(`http://localhost:5000/api/data/detail-user/${id}`).pipe(map(data => {
+      return <User>data;
+    }));
+  }
+
+  getByGroup(name): Observable<Student[]> {
+    return this.http.post('http://localhost:5000/api/data/details-group', {name}).pipe(map(data => {
+      return <Student[]>data;
+  }));
+}
+
   logIn() {
-    
+
   }
 
   logOut() {
@@ -62,16 +79,6 @@ export class UsersService {
       'Преподаватель': false,
       'Админ': false
     };
-  }
-
-  getUser(id) {
-    function findId(elem) {
-      if (elem.id === id) {
-        return elem;
-      }
-      return false;
-    }
-    return this.users.getValue().find(findId);
   }
 
 }

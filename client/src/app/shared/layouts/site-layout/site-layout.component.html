@@ -1,0 +1,31 @@
+<!-- <ul class="sidenav sidenav-fixed a-sidenav">
+  <h4>Главная</h4>
+  <li 
+    class="bold" 
+    *ngFor="let link of links"
+    routerLinkActive="active"
+  >
+    <a [routerLink]="link.url" class="waves-effect waves-orange">
+      {{link.name}}
+    </a>
+  </li> -->
+  
+
+<!--   <li class="bold last">
+    <a class="waves-effect waves-orange" (click)="logout($event)">Выйти</a>
+  </li>
+</ul> -->
+<nav mat-tab-nav-bar>
+  <a mat-tab-link *ngFor="let item of links;"
+    [routerLink]="item.url"
+    routerLinkActive="active"
+    (click)="activeLink = item.url"
+    [active]="activeLink === item.url"
+    > 
+    {{item.name}}
+  </a>
+</nav>
+
+<main class="content">
+<router-outlet></router-outlet>
+</main>

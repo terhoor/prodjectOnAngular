@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {User} from '../../shared/user.model';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UsersService } from '../users.service';
+import { Location } from '@angular/common';
+import { UsersService } from '../../shared/services/users.service';
+import { User } from '../../shared/user.model';
 
 @Component({
   selector: 'app-user-details',
@@ -10,13 +11,21 @@ import { UsersService } from '../users.service';
 })
 export class UserDetailsComponent implements OnInit {
   id: number;
-  user;
-  userIs;
-  constructor(private route: ActivatedRoute, private usersService: UsersService) { }
+  user: User;
+
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private usersService: UsersService) { }
 
   ngOnInit() {
-    this.id = Number(this.route.snapshot.params['id']);
-    this.user = this.usersService.getUser(this.id);
+    this.getUser();
+  }
+
+  getUser(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.usersService.getById(id)
+      .subscribe(user => this.user = user);
   }
 
 }

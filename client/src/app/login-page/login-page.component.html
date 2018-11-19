@@ -1,1 +1,55 @@
-<h2>Страница входа</h2>
+<form 
+  class="card"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="card-content">
+    <div class="card-title">Войти в систему</div>
+    <div class="input-field">
+      <label for="email">Email:</label>
+
+      <input
+      id="email"
+      type="email"
+      [formControlName]="'email'"
+      [ngClass]="{'invalid': form.get('email').invalid && form.get('email').touched}"
+      >
+      <span
+        class="red-text mywrapper"
+        *ngIf="form.get('email').invalid && form.get('email').touched"
+      >
+        <span *ngIf="form.get('email').errors['required']">Email не должен быть пустым</span>
+        <span *ngIf="form.get('email').errors['email']">Введите корректный email</span>
+      </span>
+    </div>
+    <div class="input-field">
+      <label for="password"
+        >Пароль:</label>
+      <input
+      id="password"
+      type="password"
+      [formControlName]="'password'"
+      [ngClass]="{'invalid': form.get('password').invalid && form.get('password').touched}"
+
+      >
+      <span
+        class="red-text mywrapper"
+        *ngIf="form.get('password').invalid && form.get('password').touched"
+      >
+        <span *ngIf="form.get('password').errors['required']">Пароль не должен быть пустым</span>
+        <span *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']">Пароль должен быть больше {{form.get('password').errors['minlength']['requiredLength']}} символов.
+          Сейчас {{form.get('password').errors['minlength']['actualLength']}}
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="card-action">
+    
+    <button 
+      type="submit"
+      mat-fab 
+      color="primary"
+      [disabled]="form.invalid || form.disabled"
+      >Войти</button>
+  </div>
+</form>
