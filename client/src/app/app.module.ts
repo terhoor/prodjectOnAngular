@@ -18,6 +18,7 @@ import { AuthService } from './shared/services/auth.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { GroupDetailsComponent } from './groups/group-details/group-details.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { ButtonsComponent } from './shared/components/buttons-list/buttons.component';
 
 
 
@@ -35,6 +36,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     SiteLayoutComponent,
     GroupDetailsComponent,
     LoaderComponent,
+    ButtonsComponent,
   ],
   imports: [
     BrowserModule,

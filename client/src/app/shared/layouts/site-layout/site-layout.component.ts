@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-site-layout',
@@ -21,13 +22,14 @@ export class SiteLayoutComponent implements OnInit {
       url: '/users-group'
     }
   ];
-  activeLink = this.links[0].url;
+  activeLink: string;
 
 
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.activeLink = '/' + this.route.snapshot.children[0].url[0].path;
   }
 
 }

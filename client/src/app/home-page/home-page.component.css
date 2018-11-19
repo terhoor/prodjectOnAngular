@@ -1,0 +1,13 @@
+.image-box {
+  width: 400px;
+  display: inline-block;
+
+}
+
+.image-box img {
+  width: 100%;
+}
+
+.center {
+  text-align: center;
+}

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { UsersService } from '../../shared/services/users.service';
 import { Student } from '../../shared/user.model';
 import { Observable } from 'rxjs';
@@ -19,8 +18,7 @@ export class GroupDetailsComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
-    private route: ActivatedRoute,
-    private location: Location
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit() {
