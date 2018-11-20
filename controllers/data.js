@@ -119,33 +119,33 @@ module.exports.changeUser = async function(req, res) {
 
 module.exports.deleteUser = async function(req, res) {
   try {
-    /* let newDb = db;
-    let user = req.body;
+    let newDb = db;
     const id = req.params.id;
-    
-
-    newDb[nameRole].forEach((userFind, index) => {
-      if (+user.id === +userFind.id) {
-        newDb[nameRole][index] = user;
-
-      }
-    });
-
+    let userFind;
     let allUsers = [...newDb['teachers'], ...newDb['students']];
     allUsers.find((user) => {
-      if (user.id === id) {
-        console.log('нашёл');
+      console.log(user.id);
+      if (+user.id === +id) {
+        userFind = user.roles[0];
         return true;
       }
       return false;
-    }) */
+    })
 
-    // запись в файл
-  //   fs.writeFile('shared/db.json', dataW, function(error){
-  //     if(error) throw error; // если возникла ошибка
-  //     console.log("Асинхронная запись файла завершена. Содержимое файла:");
-  // });
-  console.log(111);
+    let nameRole = userFind.toLowerCase() + 's';
+    newDb[nameRole].forEach((user, idx) => {
+      if (user.id === +id) {
+        newDb[nameRole].splice(idx, 1);
+      }
+    });
+
+    const dataW = JSON.stringify(newDb);
+
+
+    fs.writeFile('shared/db.json', dataW, function(error){
+      if(error) throw error; // если возникла ошибка
+      console.log("Асинхронная запись файла завершена. Содержимое файла:");
+    });
     
     
     res.status(200).json("sss");
