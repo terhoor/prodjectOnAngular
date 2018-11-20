@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {User} from '../models/user.model';
+import {IUser} from '../models/user.model';
 import {Student} from '../models/student.model';
 import {Teacher} from '../models/teacher.model';
 import { BehaviorSubject, Observable  } from 'rxjs';
@@ -13,7 +13,7 @@ export class UsersService {
   data: {};
   teachers: BehaviorSubject<Teacher[]>;
   students: BehaviorSubject<Student[]>;
-  users: BehaviorSubject<User[]>;
+  users: BehaviorSubject<IUser[]>;
   groups: BehaviorSubject<string[]>;
   userIs = {
     'Студент': false,
@@ -59,9 +59,9 @@ export class UsersService {
     }));
   }
 
-  getById(id): Observable<User>  {
+  getById(id): Observable<IUser>  {
     return this.http.get(`http://localhost:5000/api/data/detail-user/${id}`).pipe(map(data => {
-      return <User>data;
+      return <IUser>data;
     }));
   }
 

@@ -19,6 +19,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { GroupDetailsComponent } from './groups/group-details/group-details.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ButtonsComponent } from './shared/components/buttons-list/buttons.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { PopupComponent, DialogOverviewComponent } from './shared/components/popup/popup.component';
 
 
 
@@ -37,6 +39,9 @@ import { ButtonsComponent } from './shared/components/buttons-list/buttons.compo
     GroupDetailsComponent,
     LoaderComponent,
     ButtonsComponent,
+    AdminPageComponent,
+    PopupComponent,
+    DialogOverviewComponent
   ],
   imports: [
     BrowserModule,

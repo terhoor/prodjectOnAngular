@@ -8,6 +8,7 @@ import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.co
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
 import { ListGroupComponent } from './groups/list-group/list-group.component';
 import { GroupDetailsComponent } from './groups/group-details/group-details.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 const appRoutes: Routes = [
   // {path: '', component: AuthLayoutComponent, children: [
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
     {path: 'detail-user/:id', component: UserDetailsComponent},
     {path: 'users-group', component: ListGroupComponent},
     {path: 'details-group/:name', component: GroupDetailsComponent},
+    {path: 'admin', component: AdminPageComponent},
   ]},
   {path: '**', redirectTo: '/login'}
 

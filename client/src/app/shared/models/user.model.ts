@@ -4,6 +4,7 @@ export interface IUser {
   firstName: string;
   patronymic: string;
   group?: string;
+  groups?: string[];
   roles?: string[];
   subjects?: {};
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { UsersService } from '../../shared/services/users.service';
-import {User} from '../../shared/models/user.model';
+import {IUser} from '../../shared/models/user.model';
 import {Student} from '../../shared/models/student.model';
 import {Teacher} from '../../shared/models/teacher.model';
 
@@ -13,7 +13,7 @@ import {Teacher} from '../../shared/models/teacher.model';
 })
 export class UserDetailsComponent implements OnInit {
   id: number;
-  user: User;
+  user: IUser;
   subj: string[];
   displayedColumns: string[];
 
@@ -34,7 +34,7 @@ export class UserDetailsComponent implements OnInit {
         this.user = user;
 
         if (user.roles.indexOf('Student') !== -1) {
-          this.subj = Object.keys(<Student>this.user.subjects);
+          this.subj = Object.keys(<IUser>this.user.subjects);
         } else if (user.roles.indexOf('Teacher') !== -1) {
           this.displayedColumns = ['groups'];
         }
