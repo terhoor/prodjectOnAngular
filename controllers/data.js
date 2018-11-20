@@ -46,3 +46,41 @@ module.exports.getByGroupName = async function(req, res) {
     errorHandler(res, e);
   }
 }
+
+module.exports.createUser = async function(req, res) {
+  try {
+    let newDb = db;
+    let user = req.body;
+
+
+    const arrayUsers = [...db.students, ...db.teachers];
+    let maxId = arrayUsers.reduce((id, elem) => {
+      if (elem.id > id) {
+        return elem.id;
+      }
+      return id;
+    }, 0);
+    
+    user.id = ++maxId;
+
+    if (user.roles === "Student") {
+      newDb['students'].push(user);
+    } else if (user.roles === "Teacher") {
+      newDb['teachers'].push(user);
+    }
+
+    user.roles = [user.roles];
+
+    const dataW = JSON.stringify(newDb);
+
+    fs.writeFile('shared/db.json', dataW, function(error){
+      if(error) throw error; // если возникла ошибка
+      console.log("Асинхронная запись файла завершена. Содержимое файла:");
+  });
+    
+    
+    res.status(200).json("sss");
+  } catch(e) {
+    errorHandler(res, e);
+  }
+}

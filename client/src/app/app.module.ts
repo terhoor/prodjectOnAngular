@@ -20,7 +20,7 @@ import { GroupDetailsComponent } from './groups/group-details/group-details.comp
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ButtonsComponent } from './shared/components/buttons-list/buttons.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
-import { DialogDataExample, DialogDataExampleDialog } from './shared/components/popup/popup.component';
+import { DialogDataComponent, DialogDataDialogComponent } from './shared/components/popup/popup.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 
 
@@ -41,8 +41,8 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
     LoaderComponent,
     ButtonsComponent,
     AdminPageComponent,
-    DialogDataExample,
-    DialogDataExampleDialog
+    DialogDataComponent,
+    DialogDataDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +54,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
     FormsModule,
   ],
   entryComponents: [
-    DialogDataExampleDialog
+    DialogDataDialogComponent
 ],
   providers: [
     UsersService,

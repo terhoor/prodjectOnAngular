@@ -7,6 +7,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -18,12 +19,14 @@ import {MatInputModule} from '@angular/material/input';
     MatTableModule, MatTabsModule,
     MatCardModule, MatDialogModule,
     MatFormFieldModule, MatInputModule,
+    MatSelectModule,
   ],
   exports: [MatButtonModule,
     MatProgressSpinnerModule,
     MatTableModule, MatTabsModule,
     MatCardModule, MatDialogModule,
-    MatFormFieldModule, MatInputModule
+    MatFormFieldModule, MatInputModule,
+    MatSelectModule,
   ],
 })
 export class MaterialModule {

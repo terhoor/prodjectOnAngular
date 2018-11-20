@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-site-layout',
@@ -26,10 +27,25 @@ export class SiteLayoutComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService
+    ) { }
 
   ngOnInit() {
     this.activeLink = '/' + this.route.snapshot.children[0].url[0].path;
+    if (this.authService.userIs['Admin']) {
+      this.links.push({
+        name: 'Админка',
+        url: '/admin'
+      });
+    }
+  }
+
+  logOut() {
+    this.authService.logOut();
+    this.router.navigate(['/login']);
   }
 
 }

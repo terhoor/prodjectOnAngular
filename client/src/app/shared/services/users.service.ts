@@ -15,11 +15,7 @@ export class UsersService {
   students: BehaviorSubject<Student[]>;
   users: BehaviorSubject<IUser[]>;
   groups: BehaviorSubject<string[]>;
-  userIs = {
-    'Студент': false,
-    'Преподаватель': false,
-    'Админ': false
-  };
+  popupStateCreate: boolean = true;
 
   constructor(private http: HttpClient) {
     this.teachers = new BehaviorSubject([]);
@@ -28,28 +24,30 @@ export class UsersService {
     this.groups = new BehaviorSubject([]);
 
 
-    this.getUsers().subscribe(data => {
-      this.data = data;
-      const users = [];
+    this.getUsers().subscribe( this.takeData.bind(this));
 
-      const teachers = data['teachers'].map((teacher) => {
-        return new Teacher(teacher);
-      });
+  }
 
-      const students = data['students'].map((student) => {
-        return new Student(student);
-      });
+  takeData(data) {
+    this.data = data;
+    const users = [];
 
-      const groups = data['groups'];
-
-      users.push(...teachers);
-      users.push(...students);
-      this.teachers.next(teachers);
-      this.students.next(students);
-      this.users.next(users);
-      this.groups.next(groups);
-
+    const teachers = data['teachers'].map((teacher) => {
+      return new Teacher(teacher);
     });
+
+    const students = data['students'].map((student) => {
+      return new Student(student);
+    });
+
+    const groups = data['groups'];
+
+    users.push(...teachers);
+    users.push(...students);
+    this.teachers.next(teachers);
+    this.students.next(students);
+    this.users.next(users);
+    this.groups.next(groups);
 
   }
 
@@ -71,17 +69,21 @@ export class UsersService {
   }));
 }
 
-  logIn() {
+  createNewUser(user) {
+    this.http.post('http://localhost:5000/api/data/users', user).subscribe(() => {
+      this.getUsers().subscribe(this.takeData.bind(this));
+    });
 
   }
 
-  logOut() {
-    this.userIs = {
-      'Студент': false,
-      'Преподаватель': false,
-      'Админ': false
-    };
+  createUser(): boolean {
+    this.popupStateCreate = true;
+    return this.popupStateCreate;
   }
 
+  changeUser(): boolean {
+    this.popupStateCreate = false;
+    return this.popupStateCreate;
+  }
 
 }

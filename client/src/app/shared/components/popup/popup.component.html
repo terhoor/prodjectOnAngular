@@ -1,11 +1,87 @@
-<h1 mat-dialog-title>Hi </h1>
+<h2 mat-dialog-title>Форма </h2>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <input matInput >
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="input-field">
+        <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="text"
+              formControlName="lastName"
+              placeholder="lastName"
+              [ngClass]="{'invalid': form.get('lastName').invalid && form.get('lastName').touched}">
+          </mat-form-field>
+          <div
+          class="helper-text red-text"
+          *ngIf="form.get('lastName').invalid && form.get('lastName').touched"
+          >
+            <span *ngIf="form.get('lastName').errors['required']">
+                lastName не может быть пустым
+            </span>
+        </div>
+    </div>
+
+    <div class="input-field">
+        <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="text"
+              formControlName="firstName"
+              placeholder="firstName"
+              [ngClass]="{'invalid': form.get('firstName').invalid && form.get('firstName').touched}">
+          </mat-form-field>
+          <div
+          class="helper-text red-text"
+          *ngIf="form.get('firstName').invalid && form.get('firstName').touched"
+          >
+            <span *ngIf="form.get('firstName').errors['required']">
+              firstName не может быть пустым
+            </span>
+        </div>
+    </div>
+
+    <div class="input-field">
+        <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="text"
+              formControlName="patronymic"
+              placeholder="patronymic"
+              [ngClass]="{'invalid': form.get('patronymic').invalid && form.get('patronymic').touched}">
+          </mat-form-field>
+          <div
+          class="helper-text red-text"
+          *ngIf="form.get('patronymic').invalid && form.get('patronymic').touched"
+          >
+            <span *ngIf="form.get('patronymic').errors['required']">
+                patronymic не может быть пустым
+            </span>
+        </div>
+    </div>
+
+    <div class="input-field">
+      <mat-form-field>
+        <mat-select placeholder="roles" formControlName="roles">
+          <mat-option *ngFor="let type of typeUsers" [value]="type.value">
+            {{type.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <div mat-dialog-actions>
+
+        <button
+          type="submit"
+          [disabled]="form.invalid || form.disabled"
+          class="waves-effect waves-light btn"
+          mat-button
+          >
+            Ок
+        </button>
+        <button type="button" mat-button (click)="onNoClick()">Cancel</button>
+      </div>
+        
+    </div>
+</form>
 </div>

@@ -9,13 +9,14 @@ import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.co
 import { ListGroupComponent } from './groups/list-group/list-group.component';
 import { GroupDetailsComponent } from './groups/group-details/group-details.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AuthGuard } from './auth.guard';
 
 const appRoutes: Routes = [
-  // {path: '', component: AuthLayoutComponent, children: [
-    // {path: '', redirectTo: '/login', pathMatch: 'full'},
-    // {path: 'login', component: LoginPageComponent},
-  // ]},
-  {path: '', component: SiteLayoutComponent, children: [
+  {path: '', component: AuthLayoutComponent, children: [
+    {path: '', redirectTo: '/login', pathMatch: 'full'},
+    {path: 'login', component: LoginPageComponent},
+  ]},
+  {path: '', component: SiteLayoutComponent, canActivate: [AuthGuard], children: [
     {path: 'home', component: HomePageComponent},
     {path: 'users-list', component: ListUsersComponent},
     {path: 'detail-user/:id', component: UserDetailsComponent},
