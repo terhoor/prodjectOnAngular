@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { UsersService } from '../../shared/services/users.service';
 import {IUser} from '../../shared/models/user.model';
@@ -23,6 +23,7 @@ export class UserDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private location: Location,
     private usersService: UsersService,
     private authService: AuthService
@@ -51,6 +52,7 @@ export class UserDetailsComponent implements OnInit {
 
   deleteUser() {
     this.usersService.userDelete(this.user.id);
+    this.router.navigate(['/users-list']);
   }
 
 }
