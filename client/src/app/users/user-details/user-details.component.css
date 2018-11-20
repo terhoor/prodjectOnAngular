@@ -99,3 +99,8 @@ simple-little-table {
 	color: #bd5a35;
 	text-decoration:underline;
 }
+
+
+.my-table {
+  width: 50%;
+}
