@@ -5,7 +5,7 @@ import { User, IUser } from '../../models/user.model';
 import { UsersService } from '../../services/users.service';
 
 export interface DialogData {
-  user: User;
+  user: IUser;
 }
 
 /**

@@ -41,7 +41,7 @@
   </table>
 <div>
   <div *ngFor="let role of user.roles">
-    <div *ngIf="role === 'Student'">
+    <div *ngIf="role === 'Student' && user.subjects">
 
       <table class="simple-little-table" cellspacing='0'>
         <tr>
@@ -55,7 +55,7 @@
         </tr>
       </table>
     </div>
-    <div *ngIf="role === 'Teacher'">
+    <div *ngIf="role === 'Teacher' && user.groups">
       <!-- begin -->
       <table
         mat-table

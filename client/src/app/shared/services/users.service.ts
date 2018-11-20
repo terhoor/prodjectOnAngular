@@ -83,6 +83,13 @@ export class UsersService {
     });
   }
 
+  userDelete(id) {
+    console.log(id);
+    this.http.get(`http://localhost:5000/api/data/users-delete/${id}`).subscribe(() => {
+      this.getUsers().subscribe(this.takeData.bind(this));
+    });
+  }
+
   createUser(): boolean {
     this.popupStateCreate = true;
     return this.popupStateCreate;

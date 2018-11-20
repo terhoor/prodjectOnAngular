@@ -48,12 +48,9 @@ export class UserDetailsComponent implements OnInit {
 
   }
 
-  changeUser() {
-    this.usersService.changeUser();
-  }
 
   deleteUser() {
-    // id 
+    this.usersService.userDelete(this.user.id);
   }
 
 }
