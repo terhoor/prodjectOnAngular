@@ -34,7 +34,7 @@ export class UserDetailsComponent implements OnInit {
         this.user = user;
 
         if (user.roles.indexOf('Student') !== -1) {
-          this.subj = Object.keys(<IUser>this.user.subjects);
+          this.subj = Object.keys(this.user.subjects);
         } else if (user.roles.indexOf('Teacher') !== -1) {
           this.displayedColumns = ['groups'];
         }

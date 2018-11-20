@@ -20,7 +20,8 @@ import { GroupDetailsComponent } from './groups/group-details/group-details.comp
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ButtonsComponent } from './shared/components/buttons-list/buttons.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
-import { PopupComponent, DialogOverviewComponent } from './shared/components/popup/popup.component';
+import { DialogDataExample, DialogDataExampleDialog } from './shared/components/popup/popup.component';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 
 
 
@@ -40,8 +41,8 @@ import { PopupComponent, DialogOverviewComponent } from './shared/components/pop
     LoaderComponent,
     ButtonsComponent,
     AdminPageComponent,
-    PopupComponent,
-    DialogOverviewComponent
+    DialogDataExample,
+    DialogDataExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -50,9 +51,18 @@ import { PopupComponent, DialogOverviewComponent } from './shared/components/pop
     MaterialModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [UsersService, AuthService],
+  entryComponents: [
+    DialogDataExampleDialog
+],
+  providers: [
+    UsersService,
+    AuthService,
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,48 +1,39 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {Component, Inject} from '@angular/core';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
+export interface DialogData {
+  animal: 'panda' | 'unicorn' | 'lion';
+}
+
+/**
+ * @title Injecting data when opening a dialog
+ */
 @Component({
-  selector: 'app-dialog-overview-component',
+  selector: 'app-dialog-data-example',
   templateUrl: './app-dialog-overview-component.html'
 })
-export class DialogOverviewComponent {
-
-  animal: string;
-  name: string;
-
+export class DialogDataExample {
   constructor(public dialog: MatDialog) {}
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(PopupComponent, {
-      width: '250px',
-      data: {name: this.name, animal: this.animal}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+  openDialog() {
+    this.dialog.open(DialogDataExampleDialog, {
+      data: {
+        animal: 'panda'
+      }
     });
   }
-
 }
 
 @Component({
   selector: 'app-popup',
   templateUrl: './popup.component.html',
-  styleUrls: ['./popup.component.css']
 })
-export class PopupComponent implements OnInit {
-
+export class DialogDataExampleDialog {
   constructor(
-    public dialogRef: MatDialogRef<PopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-    ngOnInit() {
-
-    }
+    public dialogRef: MatDialogRef<DialogDataExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }
