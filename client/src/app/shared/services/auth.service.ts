@@ -29,15 +29,12 @@ export class AuthService {
   };
 
   constructor() {
-    console.log('AuthService');
-
   }
 
   authorize(admin = false) {
-    console.log(admin);
-    if (admin) {
+    /* if (admin) {
       return this.userIs['Admin'];
-    }
+    } */
     const arrFlag = Object.values(this.userIs);
 
     if (arrFlag.indexOf(true) !== -1) {
