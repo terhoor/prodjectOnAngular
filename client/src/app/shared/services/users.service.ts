@@ -22,6 +22,7 @@ export class UsersService {
     this.students = new BehaviorSubject([]);
     this.users = new BehaviorSubject([]);
     this.groups = new BehaviorSubject([]);
+   
 
 
     this.getUsers().subscribe( this.takeData.bind(this));
@@ -76,6 +77,12 @@ export class UsersService {
 
   }
 
+  changeUserDb(user) {
+    this.http.post('http://localhost:5000/api/data/users-change', user).subscribe(() => {
+      this.getUsers().subscribe(this.takeData.bind(this));
+    });
+  }
+
   createUser(): boolean {
     this.popupStateCreate = true;
     return this.popupStateCreate;
@@ -85,5 +92,7 @@ export class UsersService {
     this.popupStateCreate = false;
     return this.popupStateCreate;
   }
+
+
 
 }

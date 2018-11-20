@@ -31,6 +31,10 @@ export class AuthService {
   constructor() {
   }
 
+  isAdmin() {
+    return this.userIs['Admin'];
+  }
+
   authorize(admin = false) {
     /* if (admin) {
       return this.userIs['Admin'];

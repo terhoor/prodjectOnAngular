@@ -5,6 +5,8 @@ import { UsersService } from '../../shared/services/users.service';
 import {IUser} from '../../shared/models/user.model';
 import {Student} from '../../shared/models/student.model';
 import {Teacher} from '../../shared/models/teacher.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-user-details',
@@ -17,15 +19,19 @@ export class UserDetailsComponent implements OnInit {
   subj: string[];
   displayedColumns: string[];
   displayedColumnsUser: string[];
+  userRole: string;
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private usersService: UsersService) { }
+    private usersService: UsersService,
+    private authService: AuthService
+    ) { }
 
   ngOnInit() {
     this.getUser();
     this.displayedColumnsUser = ['lastName', 'firstName', 'patronymic', 'role'];
+    this.userRole = this.authService.isAdmin();
   }
 
   getUser(): void {
@@ -40,6 +46,14 @@ export class UserDetailsComponent implements OnInit {
         }
       });
 
+  }
+
+  changeUser() {
+    this.usersService.changeUser();
+  }
+
+  deleteUser() {
+    // id 
   }
 
 }

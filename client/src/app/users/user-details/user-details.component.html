@@ -1,10 +1,19 @@
 <h2>Информация о пользователе</h2>
 
 <div *ngIf="user; else loader">
+    <div class="block-for-admin" *ngIf="userRole">
+      <app-dialog-data-example
+      nameBtn="Изменить пользователя"
+      (click)="changeUser()"
+      [user]="user"
+      ></app-dialog-data-example>
+      <button mat-raised-button color="primary" (click)="deleteUser()">Удалить</button>
+    </div>
   <table
     mat-table
     [dataSource]="[user]"
     class="mat-elevation-z8 my-table"
+    (dblclick)="changeForAdmin()"
   >
 
   <ng-container matColumnDef="lastName">

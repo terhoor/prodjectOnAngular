@@ -84,3 +84,31 @@ module.exports.createUser = async function(req, res) {
     errorHandler(res, e);
   }
 }
+
+
+module.exports.changeUser = async function(req, res) {
+  try {
+    let newDb = db;
+    let user = req.body;
+    user.roles = [user.roles];
+    newDb[user.roles[0].toLowerCase() + 's'].forEach((userFind, index) => {
+      if (+user.id === +userFind.id) {
+        newDb[user.roles[0].toLowerCase() + 's'][index] = user;
+
+      }
+    });
+
+     const dataW = JSON.stringify(newDb);
+
+    // запись в файл
+    fs.writeFile('shared/db.json', dataW, function(error){
+      if(error) throw error; // если возникла ошибка
+      console.log("Асинхронная запись файла завершена. Содержимое файла:");
+  });
+    
+    
+    res.status(200).json("sss");
+  } catch(e) {
+    errorHandler(res, e);
+  }
+}
