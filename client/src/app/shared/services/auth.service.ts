@@ -33,10 +33,13 @@ export class AuthService {
 
   }
 
-  authorize() {
+  authorize(admin = false) {
+    console.log(admin);
+    if (admin) {
+      return this.userIs['Admin'];
+    }
     const arrFlag = Object.values(this.userIs);
-    console.log(this.userIs);
-    console.log(arrFlag);
+
     if (arrFlag.indexOf(true) !== -1) {
       return true;
     }

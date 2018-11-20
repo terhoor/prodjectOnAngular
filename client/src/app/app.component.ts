@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     const dataAuth = JSON.parse(localStorage.getItem(stateIs));
     if (dataAuth) {
-      console.log(dataAuth);
       this.authService.userIs = dataAuth;
     }
 

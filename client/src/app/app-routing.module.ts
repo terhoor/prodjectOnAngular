@@ -11,6 +11,7 @@ import { GroupDetailsComponent } from './groups/group-details/group-details.comp
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AuthGuard } from './auth.guard';
 
+
 const appRoutes: Routes = [
   {path: '', component: AuthLayoutComponent, children: [
     {path: '', redirectTo: '/login', pathMatch: 'full'},
