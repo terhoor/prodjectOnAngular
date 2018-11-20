@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { UsersService } from '../../shared/services/users.service';
-import { User, Student } from '../../shared/user.model';
+import {User} from '../../shared/models/user.model';
+import {Student} from '../../shared/models/student.model';
+import {Teacher} from '../../shared/models/teacher.model';
 
 @Component({
   selector: 'app-user-details',
@@ -11,7 +13,7 @@ import { User, Student } from '../../shared/user.model';
 })
 export class UserDetailsComponent implements OnInit {
   id: number;
-  user: any;
+  user: User;
   subj: string[];
   displayedColumns: string[];
 

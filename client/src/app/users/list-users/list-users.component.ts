@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 
-import {User} from '../../shared/user.model';
+import {User} from '../../shared/models/user.model';
 import { UsersService } from '../../shared/services/users.service';
 
 @Component({

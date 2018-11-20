@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../shared/services/users.service';
-import { Student } from '../../shared/user.model';
+import { Student } from '../../shared/models/student.model';
 import { Observable } from 'rxjs';
 
 

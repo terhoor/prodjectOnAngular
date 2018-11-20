@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import {User, Student, Teacher} from '../user.model';
+import {User} from '../models/user.model';
+import {Student} from '../models/student.model';
+import {Teacher} from '../models/teacher.model';
 import { BehaviorSubject, Observable  } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
