@@ -8,7 +8,7 @@ import {Teacher} from '../../shared/models/teacher.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { BehaviorSubject } from 'rxjs';
 import { MatDialog } from '@angular/material';
-import { DialogComponent } from 'src/app/shared/components/popup/popup.component';
+import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 
 @Component({
   selector: 'app-user-details',
@@ -64,7 +64,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(DialogComponent, {
+    this.dialog.open(PopupComponent, {
       width: '450px',
       data: this.user
     });

@@ -16,7 +16,7 @@ export class SiteLayoutComponent implements OnInit {
     },
     {
       name: 'Список пользователей',
-      url: '/users-list'
+      url: '/users'
     },
     {
       name: 'Список групп',

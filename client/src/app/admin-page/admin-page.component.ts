@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../shared/services/users.service';
-import { DialogComponent } from '../shared/components/popup/popup.component';
+import { PopupComponent } from '../shared/components/popup/popup.component';
 import { MatDialog } from '@angular/material';
 
 @Component({
@@ -19,7 +19,7 @@ export class AdminPageComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(DialogComponent, {
+    this.dialog.open(PopupComponent, {
       width: '450px'
     });
   }

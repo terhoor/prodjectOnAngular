@@ -7,7 +7,7 @@ import { HttpClientModule  } from '@angular/common/http';
 import { MaterialModule } from './material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { ListUsersComponent } from './users/list-users/list-users.component';
+import { UsersComponent } from './users/users.component';
 import { ListGroupComponent } from './groups/list-group/list-group.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -20,7 +20,7 @@ import { GroupDetailsComponent } from './groups/group-details/group-details.comp
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ButtonsComponent } from './shared/components/buttons-list/buttons.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
-import { DialogComponent } from './shared/components/popup/popup.component';
+import { PopupComponent } from './shared/components/popup/popup.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 
 
@@ -31,7 +31,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
   declarations: [
     AppComponent,
     LoginPageComponent,
-    ListUsersComponent,
+    UsersComponent,
     ListGroupComponent,
     UserDetailsComponent,
     HomePageComponent,
@@ -41,7 +41,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
     LoaderComponent,
     ButtonsComponent,
     AdminPageComponent,
-    DialogComponent
+    PopupComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +53,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
     FormsModule,
   ],
   entryComponents: [
-    DialogComponent
+    PopupComponent
 ],
   providers: [
     UsersService,

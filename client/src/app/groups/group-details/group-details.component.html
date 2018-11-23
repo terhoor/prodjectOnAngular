@@ -32,7 +32,7 @@
   
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns; let user"  [routerLink]="['/detail-user', user.id]"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns; let user"  [routerLink]="['/users', user.id]"></tr>
 
 </table>
 

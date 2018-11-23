@@ -14,8 +14,7 @@ export interface DialogData {
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.css']
 })
-export class DialogComponent implements OnInit {
-  // @Input() user: IUser;
+export class PopupComponent implements OnInit {
   form: FormGroup;
   typeUsers: any = [
     {value: 'Teacher', viewValue: 'Teacher'},
@@ -24,7 +23,7 @@ export class DialogComponent implements OnInit {
   ];
 
   constructor(
-    @Optional() public dialogRef: MatDialogRef<DialogComponent>,
+    @Optional() public dialogRef: MatDialogRef<PopupComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public user: any,
     private usersService: UsersService
     
@@ -43,9 +42,7 @@ export class DialogComponent implements OnInit {
       } else {
         this.usersService.createUserState();
       }
-      console.log('before');
-      console.log(this.usersService.popupStateCreate);
-      console.log('after');
+
       if (!this.usersService.popupStateCreate) {
         console.log(this.user);
         this.form.setValue({

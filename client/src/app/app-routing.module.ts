@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ListUsersComponent } from './users/list-users/list-users.component';
+import { UsersComponent } from './users/users.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -19,8 +19,8 @@ const appRoutes: Routes = [
   ]},
   {path: '', component: SiteLayoutComponent, canActivate: [AuthGuard], children: [
     {path: 'home', component: HomePageComponent},
-    {path: 'users-list', component: ListUsersComponent},
-    {path: 'detail-user/:id', component: UserDetailsComponent},
+    {path: 'users', component: UsersComponent},
+    {path: 'users/:id', component: UserDetailsComponent},
     {path: 'users-group', component: ListGroupComponent},
     {path: 'details-group/:name', component: GroupDetailsComponent},
     {path: 'admin', component: AdminPageComponent},
