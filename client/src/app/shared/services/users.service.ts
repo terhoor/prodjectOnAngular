@@ -11,21 +11,17 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class UsersService {
   data: {};
-  teachers: BehaviorSubject<Teacher[]>;
-  students: BehaviorSubject<Student[]>;
-  users: BehaviorSubject<IUser[]>;
-  groups: BehaviorSubject<string[]>;
-  popupStateCreate: boolean = true;
+  teachers: BehaviorSubject<Teacher[]> = new BehaviorSubject([]);
+  students: BehaviorSubject<Student[]> = new BehaviorSubject([]);
+  users: BehaviorSubject<IUser[]> = new BehaviorSubject([]);
+  groups: BehaviorSubject<string[]> = new BehaviorSubject([]);
+  _popupStateCreate: boolean = true;
 
-  constructor(private http: HttpClient) {
-    this.teachers = new BehaviorSubject([]);
-    this.students = new BehaviorSubject([]);
-    this.users = new BehaviorSubject([]);
-    this.groups = new BehaviorSubject([]);
-   
+  constructor(
+    private http: HttpClient
 
-
-    this.getUsers().subscribe( this.takeData.bind(this));
+    ) {
+    this.getUsers().subscribe( this.takeData.bind(this) );
 
   }
 
@@ -84,22 +80,22 @@ export class UsersService {
   }
 
   userDelete(id) {
-    console.log(id);
     this.http.get(`http://localhost:5000/api/data/users-delete/${id}`).subscribe(() => {
       this.getUsers().subscribe(this.takeData.bind(this));
     });
   }
 
-  createUser(): boolean {
-    this.popupStateCreate = true;
-    return this.popupStateCreate;
+  createUserState(): void {
+    this._popupStateCreate = true;
   }
 
-  changeUser(): boolean {
-    this.popupStateCreate = false;
-    return this.popupStateCreate;
+  changeUserState(): void {
+    this._popupStateCreate = false;
   }
 
+  get popupStateCreate(): boolean {
+    return this._popupStateCreate;
+  }
 
 
 }

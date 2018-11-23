@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit, Optional} from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User, IUser } from '../../models/user.model';
@@ -8,35 +8,14 @@ export interface DialogData {
   user: IUser;
 }
 
-/**
- * @title Injecting data when opening a dialog
- */
-@Component({
-  selector: 'app-dialog-data-example',
-  templateUrl: './app-dialog-overview-component.html'
-})
-export class DialogDataComponent {
-  @Input() nameBtn: string;
-  @Input() user: IUser;
-
-  constructor(public dialog: MatDialog) {}
-
-  openDialog() {
-    this.dialog.open(DialogDataDialogComponent, {
-      width: '450px',
-      data: {
-        user: this.user
-      }
-    });
-  }
-}
 
 @Component({
   selector: 'app-popup',
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.css']
 })
-export class DialogDataDialogComponent implements OnInit {
+export class DialogComponent implements OnInit {
+  // @Input() user: IUser;
   form: FormGroup;
   typeUsers: any = [
     {value: 'Teacher', viewValue: 'Teacher'},
@@ -45,8 +24,8 @@ export class DialogDataDialogComponent implements OnInit {
   ];
 
   constructor(
-    public dialogRef: MatDialogRef<DialogDataDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Optional() public dialogRef: MatDialogRef<DialogComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public user: any,
     private usersService: UsersService
     
     ) {}
@@ -59,16 +38,21 @@ export class DialogDataDialogComponent implements OnInit {
         roles: new FormControl(null, [Validators.required]),
       });
 
-      if (this.data.user) {
-        this.usersService.changeUser();
+      if (this.user) {
+        this.usersService.changeUserState();
+      } else {
+        this.usersService.createUserState();
       }
+      console.log('before');
+      console.log(this.usersService.popupStateCreate);
+      console.log('after');
       if (!this.usersService.popupStateCreate) {
-        console.log(this.data);
+        console.log(this.user);
         this.form.setValue({
-          lastName: this.data.user.lastName,
-          firstName: this.data.user.firstName,
-          patronymic: this.data.user.patronymic,
-          roles: this.data.user.roles[0]
+          lastName: this.user.lastName,
+          firstName: this.user.firstName,
+          patronymic: this.user.patronymic,
+          roles: this.user.roles[0]
         });
       }
     }
@@ -85,9 +69,9 @@ export class DialogDataDialogComponent implements OnInit {
       this.dialogRef.close();
     } else {
       const userNeed = this.form.value;
-      userNeed.id = this.data.user.id;
+      userNeed.id = this.user.id;
       this.usersService.changeUserDb(userNeed);
-      // this.dialogRef.close();
+      this.dialogRef.close();
 
     }
   }

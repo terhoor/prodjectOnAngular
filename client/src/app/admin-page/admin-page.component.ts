@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../shared/services/users.service';
+import { DialogComponent } from '../shared/components/popup/popup.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-admin-page',
@@ -7,13 +9,18 @@ import { UsersService } from '../shared/services/users.service';
   styleUrls: ['./admin-page.component.css']
 })
 export class AdminPageComponent implements OnInit {
-  constructor(private usersService: UsersService) { }
+  constructor(
+    private usersService: UsersService,
+    public dialog: MatDialog
+
+    ) { }
 
   ngOnInit() {
   }
 
-
-
-
-
+  openDialog() {
+    this.dialog.open(DialogComponent, {
+      width: '450px'
+    });
+  }
 }

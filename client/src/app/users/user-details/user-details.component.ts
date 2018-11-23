@@ -7,6 +7,8 @@ import {Student} from '../../shared/models/student.model';
 import {Teacher} from '../../shared/models/teacher.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { BehaviorSubject } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from 'src/app/shared/components/popup/popup.component';
 
 @Component({
   selector: 'app-user-details',
@@ -26,7 +28,8 @@ export class UserDetailsComponent implements OnInit {
     private router: Router,
     private location: Location,
     private usersService: UsersService,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialog: MatDialog
     ) { }
 
   ngOnInit() {
@@ -37,14 +40,19 @@ export class UserDetailsComponent implements OnInit {
 
   getUser(): void {
     const id = +this.route.snapshot.paramMap.get('id');
+    console.log(id);
+
     this.usersService.getById(id)
       .subscribe((user) => {
         this.user = user;
         if (user.roles.indexOf('Student') !== -1) {
-          this.subj = Object.keys(this.user.subjects);
+          if(this.user.subjects) {
+            this.subj = Object.keys(this.user.subjects);
+          }
         } else if (user.roles.indexOf('Teacher') !== -1) {
           this.displayedColumns = ['groups'];
         }
+        console.log(this.user);
       });
 
   }
@@ -53,6 +61,13 @@ export class UserDetailsComponent implements OnInit {
   deleteUser() {
     this.usersService.userDelete(this.user.id);
     this.router.navigate(['/users-list']);
+  }
+
+  openDialog() {
+    this.dialog.open(DialogComponent, {
+      width: '450px',
+      data: this.user
+    });
   }
 
 }
