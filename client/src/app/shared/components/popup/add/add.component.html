@@ -1,0 +1,105 @@
+<h2 mat-dialog-title>Создание пользователя</h2>
+<div mat-dialog-content>
+  <form [formGroup]="formCreate" (ngSubmit)="onSubmit()">
+    <div class="input-field">
+        <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="text"
+              formControlName="lastName"
+              placeholder="lastName"
+              [ngClass]="{'invalid': formCreate.get('lastName').invalid && formCreate.get('lastName').touched}">
+          </mat-form-field>
+          <div
+          class="helper-text red-text"
+          *ngIf="formCreate.get('lastName').invalid && formCreate.get('lastName').touched"
+          >
+            <span *ngIf="formCreate.get('lastName').errors['required']">
+                lastName не может быть пустым
+            </span>
+        </div>
+    </div>
+
+    <div class="input-field">
+        <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="text"
+              formControlName="firstName"
+              placeholder="firstName"
+              [ngClass]="{'invalid': formCreate.get('firstName').invalid && formCreate.get('firstName').touched}">
+          </mat-form-field>
+          <div
+          class="helper-text red-text"
+          *ngIf="formCreate.get('firstName').invalid && formCreate.get('firstName').touched"
+          >
+            <span *ngIf="formCreate.get('firstName').errors['required']">
+              firstName не может быть пустым
+            </span>
+        </div>
+    </div>
+
+    <div class="input-field">
+        <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="text"
+              formControlName="patronymic"
+              placeholder="patronymic"
+              [ngClass]="{'invalid': formCreate.get('patronymic').invalid && formCreate.get('patronymic').touched}">
+          </mat-form-field>
+          <div
+          class="helper-text red-text"
+          *ngIf="formCreate.get('patronymic').invalid && formCreate.get('patronymic').touched"
+          >
+            <span *ngIf="formCreate.get('patronymic').errors['required']">
+                patronymic не может быть пустым
+            </span>
+        </div>
+    </div>
+
+    <div class="input-field">
+      <mat-form-field>
+        <mat-select placeholder="roles" formControlName="roles">
+          <mat-option *ngFor="let type of typeUsers" [value]="type.value">
+            {{type.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    
+    <div class="input-field" *ngIf="!!(formCreate.get('roles').value === 'Teacher')">
+      <mat-form-field>
+        <mat-select placeholder="Group" [formControl]="groups" multiple>
+          <mat-option *ngFor="let group of groupsList" [value]="group">{{group}} </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="input-field" [hidden]="!(formCreate.get('roles').value === 'Student')">
+      <mat-form-field>
+        <mat-select placeholder="Group" [formControl]="groups">
+          <mat-option *ngFor="let group of groupsList" [value]="group">{{group}} </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+
+    <div>
+      <div mat-dialog-actions>
+
+        <button
+          type="submit"
+          [disabled]="formCreate.invalid || formCreate.disabled"
+          class="waves-effect waves-light btn"
+          mat-button
+          >
+            Ок
+        </button>
+        <button type="button" mat-button (click)="onNoClick()">Cancel</button>
+      </div>
+        
+    </div>
+</form>
+</div>

@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import { Roles } from '../roles';
 
 const stateIs = 'whoI';
 
@@ -23,21 +24,21 @@ const usersData = [
 @Injectable()
 export class AuthService {
   userIs: any = {
-    'Student': false,
-    'Teacher': false,
-    'Admin': false
+    [Roles.Student] : false,
+    [Roles.Teacher]: false,
+    [Roles.Admin]: false
   };
 
   constructor() {
   }
 
   isAdmin() {
-    return this.userIs['Admin'];
+    return this.userIs[Roles.Admin];
   }
 
-  authorize(admin = false) {
+  authorized(admin = false) {
     /* if (admin) {
-      return this.userIs['Admin'];
+      return this.userIs[Roles.Admin];
     } */
     const arrFlag = Object.values(this.userIs);
 
@@ -50,6 +51,7 @@ export class AuthService {
   logIn(valueObj): boolean {
     let login = false;
     let role: string;
+    
     usersData.forEach((obj) => {
       if (obj.email === valueObj.email && obj.password === valueObj.password) {
         login = true;
@@ -68,9 +70,9 @@ export class AuthService {
 
   logOut() {
     this.userIs = {
-      'Student': false,
-      'Teacher': false,
-      'Admin': false
+      [Roles.Student] : false,
+      [Roles.Teacher]: false,
+      [Roles.Admin]: false
     };
     localStorage.setItem(stateIs, JSON.stringify(this.userIs));
 

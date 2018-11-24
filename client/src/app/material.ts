@@ -8,6 +8,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -19,14 +20,14 @@ import {MatSelectModule} from '@angular/material/select';
     MatTableModule, MatTabsModule,
     MatCardModule, MatDialogModule,
     MatFormFieldModule, MatInputModule,
-    MatSelectModule,
+    MatSelectModule, MatIconModule
   ],
   exports: [MatButtonModule,
     MatProgressSpinnerModule,
     MatTableModule, MatTabsModule,
     MatCardModule, MatDialogModule,
     MatFormFieldModule, MatInputModule,
-    MatSelectModule,
+    MatSelectModule, MatIconModule
   ],
 })
 export class MaterialModule {

@@ -17,7 +17,7 @@ export class AuthGuardAdmin implements CanActivate, CanActivateChild {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    if (this.auth.authorize(true)) {
+    if (this.auth.authorized(true)) {
       return of(true);
     } else {
       this.router.navigate(['/home'], {

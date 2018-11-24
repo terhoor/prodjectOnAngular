@@ -1,8 +1,7 @@
 import {User} from './user.model';
 
-
 export class Teacher extends User {
-  groups: number[];
+  group: string[];
   roles: string[];
   subjects: string;
 
@@ -14,7 +13,7 @@ export class Teacher extends User {
         objTeacher.firstName,
         objTeacher.patronymic
         );
-      this.groups = objTeacher.groups;
+      this.group = objTeacher.group;
       this.roles = objTeacher.roles;
       this.subjects = objTeacher.subjects;
     }

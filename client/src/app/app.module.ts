@@ -20,8 +20,9 @@ import { GroupDetailsComponent } from './groups/group-details/group-details.comp
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ButtonsComponent } from './shared/components/buttons-list/buttons.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
-import { PopupComponent } from './shared/components/popup/popup.component';
-import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { AddPopupComponent } from './shared/components/popup/add/add.component';
+import { DeletePopupComponent } from './shared/components/popup/delete/delete.component';
+import { EditPopupComponent } from './shared/components/popup/edit/edit.component';
 
 
 
@@ -41,7 +42,9 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
     LoaderComponent,
     ButtonsComponent,
     AdminPageComponent,
-    PopupComponent
+    AddPopupComponent,
+    DeletePopupComponent,
+    EditPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -53,13 +56,13 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
     FormsModule,
   ],
   entryComponents: [
-    PopupComponent
+    AddPopupComponent,
+    DeletePopupComponent,
+    EditPopupComponent
 ],
   providers: [
     UsersService,
     AuthService,
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
-
   ],
 
   bootstrap: [AppComponent]

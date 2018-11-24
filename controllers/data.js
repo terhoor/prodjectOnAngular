@@ -35,7 +35,7 @@ module.exports.getByGroupName = async function(req, res) {
     const groupArr = await function() {
       const arrayUsers = [...db.students];
       return arrayUsers.filter((user) => {
-        if (user.groups === nameGroup.name) {
+        if (user.group === nameGroup.name) {
           return true;
         }
         return false;
@@ -52,7 +52,6 @@ module.exports.createUser = async function(req, res) {
     let newDb = db;
     let user = req.body;
 
-
     const arrayUsers = [...db.students, ...db.teachers];
     let maxId = arrayUsers.reduce((id, elem) => {
       if (elem.id > id) {
@@ -63,13 +62,11 @@ module.exports.createUser = async function(req, res) {
     
     user.id = ++maxId;
 
-    if (user.roles === "Student") {
+    if (user.roles[0] === "Student") {
       newDb['students'].push(user);
-    } else if (user.roles === "Teacher") {
+    } else if (user.roles[0] === "Teacher") {
       newDb['teachers'].push(user);
     }
-
-    user.roles = [user.roles];
 
     const dataW = JSON.stringify(newDb);
 
@@ -91,26 +88,34 @@ module.exports.changeUser = async function(req, res) {
     let newDb = db;
     
     let user = req.body;
-    user.roles = [user.roles];
     let nameRole = user.roles[0].toLowerCase() + 's';
+    
 
-    newDb[nameRole].forEach((userFind, index) => {
-      if (+user.id === +userFind.id) {
-        newDb[nameRole][index] = user;
+    newDb['teachers'].forEach((userF, i) => {
+      if (+userF.id === +user.id) {
+        console.log('нашёл');
+        newDb['teachers'].splice(i, 1);
+      };
+    })
 
-      }
-    });
+    newDb['students'].forEach((userF, i) => {
+      if (+userF.id === +user.id) {
+        console.log('нашёл');
+        newDb['students'].splice(i, 1);
+      };
+    })
 
-     const dataW = JSON.stringify(newDb);
+    newDb[nameRole].push(user);
 
+    const dataW = JSON.stringify(newDb);
     // запись в файл
     fs.writeFile('shared/db.json', dataW, function(error){
       if(error) throw error; // если возникла ошибка
       console.log("Асинхронная запись файла завершена. Содержимое файла:");
-  });
+    });
     
     
-    res.status(200).json("sss");
+    res.status(200).json();
   } catch(e) {
     errorHandler(res, e);
   }
@@ -124,7 +129,6 @@ module.exports.deleteUser = async function(req, res) {
     let userFind;
     let allUsers = [...newDb['teachers'], ...newDb['students']];
     allUsers.find((user) => {
-      console.log(user.id);
       if (+user.id === +id) {
         userFind = user.roles[0];
         return true;

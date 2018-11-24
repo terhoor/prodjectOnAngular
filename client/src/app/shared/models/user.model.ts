@@ -3,10 +3,6 @@ export interface IUser {
   lastName: string;
   firstName: string;
   patronymic: string;
-  group?: string;
-  groups?: string[];
-  roles?: string[];
-  subjects?: {};
 }
 
 export class User implements IUser {

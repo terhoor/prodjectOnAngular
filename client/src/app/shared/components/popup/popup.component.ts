@@ -3,6 +3,7 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User, IUser } from '../../models/user.model';
 import { UsersService } from '../../services/users.service';
+import { Roles } from '../../roles';
 
 export interface DialogData {
   user: IUser;
@@ -17,8 +18,8 @@ export interface DialogData {
 export class PopupComponent implements OnInit {
   form: FormGroup;
   typeUsers: any = [
-    {value: 'Teacher', viewValue: 'Teacher'},
-    {value: 'Student', viewValue: 'Student'}
+    {value: Roles.Teacher, viewValue: 'Преподаватель'},
+    {value: Roles.Student, viewValue: 'Студент'}
 
   ];
 
@@ -26,7 +27,7 @@ export class PopupComponent implements OnInit {
     @Optional() public dialogRef: MatDialogRef<PopupComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public user: any,
     private usersService: UsersService
-    
+
     ) {}
 
     ngOnInit() {
@@ -59,14 +60,14 @@ export class PopupComponent implements OnInit {
   }
   onSubmit() {
     if (this.usersService.popupStateCreate) {
-
       const newUser = this.form.value;
-      console.log('req');
+      newUser.roles = [newUser.roles];
       this.usersService.createNewUser(newUser);
       this.dialogRef.close();
     } else {
       const userNeed = this.form.value;
       userNeed.id = this.user.id;
+      userNeed.roles = [this.form.value.roles];
       this.usersService.changeUserDb(userNeed);
       this.dialogRef.close();
 

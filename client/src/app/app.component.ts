@@ -24,8 +24,8 @@ export class AppComponent implements OnInit {
       this.authService.userIs = dataAuth;
     }
 
-    if (this.authService.authorize()) {
-      this.router.navigate(['/home']);
+    if (this.authService.authorized()) {
+      // this.router.navigate(['/home']);
     }
   }
 }
