@@ -3,6 +3,9 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { UsersService } from 'src/app/shared/services/users.service';
 import { Roles } from 'src/app/shared/roles';
+import { Teacher } from 'src/app/shared/models/teacher.model';
+import { Student } from 'src/app/shared/models/student.model';
+import { isArray } from 'util';
 
 
 @Component({
@@ -16,8 +19,11 @@ export class EditPopupComponent implements OnInit {
     firstName: [null, [Validators.required]],
     patronymic: [null, [Validators.required]],
     roles: [null, [Validators.required]],
-    group: [null, [Validators.required]]
+    group: [null, [Validators.required]],
+    subjects: [null]
   });
+
+  exampleUser: Student | Teacher;
 
   typeUsers: any = [
     {value: Roles.Teacher, viewValue: 'Преподаватель'},
@@ -26,7 +32,7 @@ export class EditPopupComponent implements OnInit {
 
   groups = new FormControl();
   groupsList: string[] = [];
-
+  subjects: string[] = [];
 
   constructor(
     @Optional() public dialogRef: MatDialogRef<EditPopupComponent>,
@@ -36,8 +42,12 @@ export class EditPopupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.exampleUser = Object.assign({}, this.user);
     this.usersService.groups.subscribe((groups) => {
       this.groupsList = groups;
+    });
+    this.usersService.subjects.subscribe((subjects) => {
+      this.subjects = subjects;
     });
     this.formEdit.setValue({
       lastName: this.user.lastName,
@@ -45,8 +55,8 @@ export class EditPopupComponent implements OnInit {
       patronymic: this.user.patronymic,
       roles: this.user.roles[0],
       group: this.user.group ? this.user.group : null,
+      subjects: !!this.exampleUser.subjects ? Object.keys(this.exampleUser.subjects) : null
     });
-    console.log(this.formEdit)
   }
 
   onNoClick(): void {
@@ -55,10 +65,20 @@ export class EditPopupComponent implements OnInit {
 
   onSubmit() {
 
-    const newUser = Object.assign(this.user, this.formEdit.value);
+    const newUser = Object.assign( this.user, this.formEdit.value);
+
+    if (newUser.roles === Roles.Student) {
+
+      newUser.subjects.forEach(idxSubj => {
+        if (isArray(this.exampleUser.subjects[idxSubj])) {
+          newUser.subjects[idxSubj] = this.exampleUser.subjects[idxSubj];
+        } else {
+          newUser.subjects[idxSubj] = [' ', ' ', ' ', ' ', ' '];
+        }
+      });
+    }
 
     newUser.roles = [newUser.roles];
-    
     this.dialogRef.close(newUser);
 
   }

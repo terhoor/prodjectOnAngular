@@ -87,6 +87,14 @@
       </mat-form-field>
     </div>
 
+    <div class="input-field" [hidden]="!(formEdit.get('roles').value === 'Student')">
+      <mat-form-field>
+        <mat-select placeholder="Subjects" formControlName="subjects" multiple>
+          <mat-option *ngFor="let subject of subjects; let idx = index" [value]="idx.toString()">{{subject}} </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
 
 
     <div>
