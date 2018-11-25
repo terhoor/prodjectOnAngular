@@ -29,9 +29,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.users$ = this.usersService.users.subscribe((dataUsers) => {
       this.listUsers = new MatTableDataSource(dataUsers);
-      this.listUsers.paginator = this.paginator;
-      this.listUsers.sort = this.sort;
-      console.log(this.listUsers);
+      this.refresh(/* this.listUsers */);
     });
   }
 
@@ -65,11 +63,15 @@ export class UsersComponent implements OnInit, OnDestroy {
 
 
   private refreshTable(user) {
-    // this.paginator._changePageSize(this.paginator.pageSize);
     const idx = this.usersService.findIndexUser(this.listUsers.data, user.id);
     this.listUsers.data.splice(idx, 1);
-    this.listUsers = new MatTableDataSource<Element>(this.listUsers.data);
-    
+    this.refresh(/* this.listUsers.data */);
+  }
+
+  private refresh(/* newData */) {
+    // this.listUsers = new MatTableDataSource(newData);
+    this.listUsers.paginator = this.paginator;
+    this.listUsers.sort = this.sort;
   }
 
 
