@@ -10,3 +10,7 @@ table {
 h2 {
   text-align: center;
 }
+
+th.mat-sort-header-sorted {
+  color: black;
+}

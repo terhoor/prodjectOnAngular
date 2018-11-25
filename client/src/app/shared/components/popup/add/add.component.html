@@ -70,7 +70,7 @@
     
     <div class="input-field" *ngIf="!!(formCreate.get('roles').value === 'Teacher')">
       <mat-form-field>
-        <mat-select placeholder="Group" [formControl]="groups" multiple>
+        <mat-select placeholder="Group" formControlName="group" multiple>
           <mat-option *ngFor="let group of groupsList" [value]="group">{{group}} </mat-option>
         </mat-select>
       </mat-form-field>
@@ -78,7 +78,7 @@
 
     <div class="input-field" [hidden]="!(formCreate.get('roles').value === 'Student')">
       <mat-form-field>
-        <mat-select placeholder="Group" [formControl]="groups">
+        <mat-select placeholder="Group" formControlName="group">
           <mat-option *ngFor="let group of groupsList" [value]="group">{{group}} </mat-option>
         </mat-select>
       </mat-form-field>

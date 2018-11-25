@@ -9,6 +9,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 
 
@@ -20,14 +22,16 @@ import {MatIconModule} from '@angular/material/icon';
     MatTableModule, MatTabsModule,
     MatCardModule, MatDialogModule,
     MatFormFieldModule, MatInputModule,
-    MatSelectModule, MatIconModule
+    MatSelectModule, MatIconModule,
+    MatPaginatorModule, MatSortModule
   ],
   exports: [MatButtonModule,
     MatProgressSpinnerModule,
     MatTableModule, MatTabsModule,
     MatCardModule, MatDialogModule,
     MatFormFieldModule, MatInputModule,
-    MatSelectModule, MatIconModule
+    MatSelectModule, MatIconModule,
+    MatPaginatorModule, MatSortModule
   ],
 })
 export class MaterialModule {

@@ -51,11 +51,4 @@ export class UserDetailsComponent implements OnInit {
 
   }
 
-
-  deleteUser() {
-    this.usersService.userDelete(this.user.id);
-    this.router.navigate(['/users']);
-  }
-
-
 }

@@ -1,3 +1,17 @@
-<p>
-  delete works!
-</p>
+<h2 mat-dialog-title>Удаление пользователя</h2>
+<div mat-dialog-content>
+
+  <div>
+    Вы действительно хотите удалить {{user.lastName}}
+  </div>
+  <div>
+    <div mat-dialog-actions>
+
+      <button type="button" (click)="onSubmit()" class="waves-effect waves-light btn" mat-button>
+        Ок
+      </button>
+      <button type="button" mat-button (click)="onNoClick()">Cancel</button>
+    </div>
+
+  </div>
+</div>

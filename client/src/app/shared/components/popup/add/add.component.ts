@@ -15,6 +15,7 @@ export class AddPopupComponent implements OnInit {
     firstName: [null, [Validators.required]],
     patronymic: [null, [Validators.required]],
     roles: [null, [Validators.required]],
+    group: [null, [Validators.required]]
   });
 
   typeUsers: any = [

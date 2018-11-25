@@ -82,14 +82,7 @@ export class UsersService {
   }
 
   userDelete(id) {
-    this.http.get(`http://localhost:5000/api/data/users-delete/${id}`).subscribe(() => {
-      // this.getUsers().subscribe(this.updateUsers.bind(this));
-      const newArrayUsers = this.users.getValue();
-      const idx = this.findIndexUser(newArrayUsers, id);
-      console.log(id);
-      console.log(idx);
-      newArrayUsers.splice(idx, 1);
-    });
+    this.http.get(`http://localhost:5000/api/data/users-delete/${id}`);
   }
 
   findIndexUser(array, id) {
