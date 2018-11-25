@@ -61,7 +61,7 @@
   
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns; let user"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns; let user" (dblclick)="showUser(row.id)"></tr>
  
 </table>
 

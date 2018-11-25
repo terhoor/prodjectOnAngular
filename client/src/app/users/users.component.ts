@@ -5,6 +5,8 @@ import { UsersService } from '../shared/services/users.service';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { AddPopupComponent } from '../shared/components/popup/add/add.component';
 import { DeletePopupComponent } from '../shared/components/popup/delete/delete.component';
+import { EditPopupComponent } from '../shared/components/popup/edit/edit.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -21,7 +23,8 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   constructor(
     private usersService: UsersService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
     ) {
 
   }
@@ -37,10 +40,6 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   }
 
-  startEdit(i, user) {
-    console.log(i, user);
-  }
-
   addNew() {
     this.dialog.open(AddPopupComponent, {
       width: '450px'
@@ -49,7 +48,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   deleteUser(user) {
     const dialogRef = this.dialog.open(DeletePopupComponent, {
-      width: '350px',
+      width: '450px',
       data: user
     });
 
@@ -59,6 +58,21 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.refreshTable(user);
       }
     });
+  }
+
+  startEdit(i, user) {
+    const dialogRef = this.dialog.open(EditPopupComponent, {
+      width: '450px',
+      data: user
+    });
+    dialogRef.afterClosed().subscribe(editUser => {
+      if (!!editUser) {
+        this.usersService.changeUserDb(editUser);
+        const idx = this.usersService.findIndexUser(this.listUsers.data, editUser.id);
+        this.listUsers.data[idx] = editUser;
+      }
+    });
+
   }
 
 
@@ -74,15 +88,12 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.listUsers.sort = this.sort;
   }
 
-
+  showUser(id) {
+    this.router.navigate(['/users', id]);
   }
 
 
-  // openDialog() {
-  //   this.dialog.open(PopupComponent, {
-  //     width: '450px',
-  //     data: this.user
-  //   });
-  // }
+}
+
 
 

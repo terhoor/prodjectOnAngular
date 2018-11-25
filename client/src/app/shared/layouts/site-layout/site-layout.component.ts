@@ -35,12 +35,6 @@ export class SiteLayoutComponent implements OnInit {
 
   ngOnInit() {
     this.activeLink = '/' + this.route.snapshot.children[0].url[0].path;
-    if (this.authService.userIs['Admin']) {
-      this.links.push({
-        name: 'Админка',
-        url: '/admin'
-      });
-    }
   }
 
   logOut() {

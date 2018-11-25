@@ -14,7 +14,6 @@ export class UsersService {
   // students: BehaviorSubject<Student[]> = new BehaviorSubject([]);
   users: BehaviorSubject<User[]> = new BehaviorSubject([]);
   groups: BehaviorSubject<string[]> = new BehaviorSubject([]);
-  _popupStateCreate: boolean = true;
 
   constructor(
     private http: HttpClient
@@ -72,17 +71,11 @@ export class UsersService {
   }
 
   changeUserDb(user) {
-    this.http.post('http://localhost:5000/api/data/users-change', user).subscribe(() => {
-
-      // this.getUsers().subscribe(this.updateUsers.bind(this));
-    const newArrayUsers = this.users.getValue();
-    const idx = this.findIndexUser(newArrayUsers, user.id);
-    newArrayUsers.splice(idx, 1, user);
-    });
+    this.http.post('http://localhost:5000/api/data/users-change', user).subscribe();
   }
 
   userDelete(id) {
-    this.http.get(`http://localhost:5000/api/data/users-delete/${id}`);
+    this.http.get(`http://localhost:5000/api/data/users-delete/${id}`).subscribe();
   }
 
   findIndexUser(array, id) {
@@ -93,18 +86,4 @@ export class UsersService {
       });
       return idx;
   }
-
-  createUserState(): void {
-    this._popupStateCreate = true;
-  }
-
-  changeUserState(): void {
-    this._popupStateCreate = false;
-  }
-
-  get popupStateCreate(): boolean {
-    return this._popupStateCreate;
-  }
-
-
 }

@@ -1,3 +1,108 @@
-<p>
-  edit works!
-</p>
+<div class="box-close">
+  <div class="close" (click)="onNoClick()">&#10006;</div>
+</div>
+<h2 mat-dialog-title>Создание пользователя</h2>
+<div mat-dialog-content>
+  <form [formGroup]="formEdit" (ngSubmit)="onSubmit()">
+    <div class="input-field">
+        <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="text"
+              formControlName="lastName"
+              placeholder="lastName"
+              [ngClass]="{'invalid': formEdit.get('lastName').invalid && formEdit.get('lastName').touched}">
+          </mat-form-field>
+          <div
+          class="helper-text red-text"
+          *ngIf="formEdit.get('lastName').invalid && formEdit.get('lastName').touched"
+          >
+            <span *ngIf="formEdit.get('lastName').errors['required']">
+                lastName не может быть пустым
+            </span>
+        </div>
+    </div>
+
+    <div class="input-field">
+        <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="text"
+              formControlName="firstName"
+              placeholder="firstName"
+              [ngClass]="{'invalid': formEdit.get('firstName').invalid && formEdit.get('firstName').touched}">
+          </mat-form-field>
+          <div
+          class="helper-text red-text"
+          *ngIf="formEdit.get('firstName').invalid && formEdit.get('firstName').touched"
+          >
+            <span *ngIf="formEdit.get('firstName').errors['required']">
+              firstName не может быть пустым
+            </span>
+        </div>
+    </div>
+
+    <div class="input-field">
+        <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="text"
+              formControlName="patronymic"
+              placeholder="patronymic"
+              [ngClass]="{'invalid': formEdit.get('patronymic').invalid && formEdit.get('patronymic').touched}">
+          </mat-form-field>
+          <div
+          class="helper-text red-text"
+          *ngIf="formEdit.get('patronymic').invalid && formEdit.get('patronymic').touched"
+          >
+            <span *ngIf="formEdit.get('patronymic').errors['required']">
+                patronymic не может быть пустым
+            </span>
+        </div>
+    </div>
+
+    <div class="input-field">
+      <mat-form-field>
+        <mat-select placeholder="roles" formControlName="roles">
+          <mat-option *ngFor="let type of typeUsers" [value]="type.value">
+            {{type.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    
+    <div class="input-field" *ngIf="!!(formEdit.get('roles').value === 'Teacher')">
+      <mat-form-field>
+        <mat-select placeholder="Group" formControlName="group" multiple>
+          <mat-option *ngFor="let group of groupsList" [value]="group">{{group}} </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="input-field" [hidden]="!(formEdit.get('roles').value === 'Student')">
+      <mat-form-field>
+        <mat-select placeholder="Group" formControlName="group">
+          <mat-option *ngFor="let group of groupsList" [value]="group">{{group}} </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+
+    <div>
+      <div mat-dialog-actions>
+
+        <button
+          type="submit"
+          [disabled]="formEdit.invalid || formEdit.disabled"
+          class="waves-effect waves-light btn"
+          mat-button
+          >
+            Ок
+        </button>
+        <button type="button" mat-button (click)="onNoClick()">Cancel</button>
+      </div>
+        
+    </div>
+</form>
+</div>

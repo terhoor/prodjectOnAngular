@@ -1,17 +1,18 @@
+<div class="box-close">
+  <div class="close" (click)="onNoClick()">&#10006;</div>
+</div>
 <h2 mat-dialog-title>Удаление пользователя</h2>
 <div mat-dialog-content>
 
   <div>
-    Вы действительно хотите удалить {{user.lastName}}
+    Вы действительно хотите удалить пользователя 
+    {{user.lastName}} {{user.firstName}} {{user.patronymic}}
   </div>
-  <div>
-    <div mat-dialog-actions>
 
+    <div mat-dialog-actions>
       <button type="button" (click)="onSubmit()" class="waves-effect waves-light btn" mat-button>
         Ок
       </button>
       <button type="button" mat-button (click)="onNoClick()">Cancel</button>
     </div>
-
-  </div>
 </div>

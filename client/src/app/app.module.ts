@@ -19,7 +19,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { GroupDetailsComponent } from './groups/group-details/group-details.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ButtonsComponent } from './shared/components/buttons-list/buttons.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AddPopupComponent } from './shared/components/popup/add/add.component';
 import { DeletePopupComponent } from './shared/components/popup/delete/delete.component';
 import { EditPopupComponent } from './shared/components/popup/edit/edit.component';
@@ -41,7 +40,6 @@ import { EditPopupComponent } from './shared/components/popup/edit/edit.componen
     GroupDetailsComponent,
     LoaderComponent,
     ButtonsComponent,
-    AdminPageComponent,
     AddPopupComponent,
     DeletePopupComponent,
     EditPopupComponent

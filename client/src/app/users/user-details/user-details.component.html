@@ -1,17 +1,6 @@
 <h2>Информация о пользователе</h2>
 
 <div *ngIf="user; else loader">
-    <div class="block-for-admin" *ngIf="userRole">
-      <button
-      mat-raised-button
-      (click)="openDialog()"
-      >
-      Изменить пользователя
-    </button>
-
-
-      <button mat-raised-button color="primary" (click)="deleteUser()">Удалить</button>
-    </div>
   <table
     mat-table
     [dataSource]="[user]"

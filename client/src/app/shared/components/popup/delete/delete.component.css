@@ -1,0 +1,15 @@
+.red-text {
+  color: red;
+}
+
+.helper-text {
+  padding-bottom: 20px;
+}
+
+.box-close {
+  display: flex;
+  justify-content: flex-end;
+}
+.close {
+  cursor: pointer;
+}
