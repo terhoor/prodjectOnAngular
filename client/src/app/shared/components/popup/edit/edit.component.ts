@@ -38,7 +38,6 @@ export class EditPopupComponent implements OnInit {
   ngOnInit() {
     this.usersService.groups.subscribe((groups) => {
       this.groupsList = groups;
-      console.log(this.groupsList);
     });
     this.formEdit.setValue({
       lastName: this.user.lastName,
@@ -47,6 +46,7 @@ export class EditPopupComponent implements OnInit {
       roles: this.user.roles[0],
       group: this.user.group ? this.user.group : null
     });
+    console.log(this.formEdit)
   }
 
   onNoClick(): void {

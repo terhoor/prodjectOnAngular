@@ -91,10 +91,10 @@
 
     <div>
       <div mat-dialog-actions>
-
+        
         <button
           type="submit"
-          [disabled]="formEdit.invalid || formEdit.disabled"
+          [disabled]="formEdit.invalid || formEdit.disabled || !formEdit.dirty"
           class="waves-effect waves-light btn"
           mat-button
           >
