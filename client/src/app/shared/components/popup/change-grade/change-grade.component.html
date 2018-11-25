@@ -1,0 +1,35 @@
+<div class="box-close">
+  <div class="close" (click)="onNoClick()">&#10006;</div>
+</div>
+<h2 mat-dialog-title>Изменение оценки</h2>
+<div mat-dialog-content>
+  <form [formGroup]="formEditGrade" (ngSubmit)="onSubmit()">
+   
+
+    <div class="input-field">
+      <mat-form-field>
+        <mat-select placeholder="Оценка" formControlName="grade">
+          <mat-option *ngFor="let grade of gradeList" [value]="grade">{{grade}} </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+
+    <div>
+      <div mat-dialog-actions>
+        
+        <button
+          type="submit"
+          [disabled]="!formEditGrade.dirty"
+          class="waves-effect waves-light btn"
+          mat-button
+          >
+            Ок
+        </button>
+        <button type="button" mat-button (click)="onNoClick()">Cancel</button>
+      </div>
+        
+    </div>
+</form>
+</div>

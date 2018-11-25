@@ -22,6 +22,7 @@ import { ButtonsComponent } from './shared/components/buttons-list/buttons.compo
 import { AddPopupComponent } from './shared/components/popup/add/add.component';
 import { DeletePopupComponent } from './shared/components/popup/delete/delete.component';
 import { EditPopupComponent } from './shared/components/popup/edit/edit.component';
+import { ChangeGradeComponent } from './shared/components/popup/change-grade/change-grade.component';
 
 
 
@@ -42,7 +43,8 @@ import { EditPopupComponent } from './shared/components/popup/edit/edit.componen
     ButtonsComponent,
     AddPopupComponent,
     DeletePopupComponent,
-    EditPopupComponent
+    EditPopupComponent,
+    ChangeGradeComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,8 @@ import { EditPopupComponent } from './shared/components/popup/edit/edit.componen
   entryComponents: [
     AddPopupComponent,
     DeletePopupComponent,
-    EditPopupComponent
+    EditPopupComponent,
+    ChangeGradeComponent
 ],
   providers: [
     UsersService,

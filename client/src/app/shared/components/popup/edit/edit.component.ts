@@ -44,7 +44,7 @@ export class EditPopupComponent implements OnInit {
       firstName: this.user.firstName,
       patronymic: this.user.patronymic,
       roles: this.user.roles[0],
-      group: this.user.group ? this.user.group : null
+      group: this.user.group ? this.user.group : null,
     });
     console.log(this.formEdit)
   }

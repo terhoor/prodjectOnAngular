@@ -6,6 +6,8 @@ import {Student} from '../../shared/models/student.model';
 import {Teacher} from '../../shared/models/teacher.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { BehaviorSubject } from 'rxjs';
+import { ChangeGradeComponent } from 'src/app/shared/components/popup/change-grade/change-grade.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-user-details',
@@ -17,7 +19,6 @@ export class UserDetailsComponent implements OnInit {
   user: Teacher | Student;
   subjectsIndex: string[];
   subjects: string[];
-  subjectStudentArr: string[];
   displayedColumns: string[];
   displayedColumnsUser: string[];
   userRole: string;
@@ -29,6 +30,8 @@ export class UserDetailsComponent implements OnInit {
     private location: Location,
     private usersService: UsersService,
     private authService: AuthService,
+    public dialog: MatDialog,
+
     ) { }
 
   ngOnInit() {
@@ -56,6 +59,23 @@ export class UserDetailsComponent implements OnInit {
         } else if (user.roles.indexOf('Teacher') !== -1) {
           this.displayedColumns = ['groups'];
         }
+      });
+
+  }
+
+  changeGrade(subIdx, idx) {
+
+      const dialogRef = this.dialog.open(ChangeGradeComponent, {
+        width: '450px',
+        data: this.user.subjects[subIdx][idx]
+      });
+  
+      dialogRef.afterClosed().subscribe(grade => {
+        if (!!grade) {
+          this.user.subjects[subIdx][idx] = grade;
+          this.usersService.changeUserDb(this.user);
+        }
+
       });
 
   }

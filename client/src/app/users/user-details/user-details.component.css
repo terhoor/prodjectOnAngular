@@ -104,3 +104,7 @@ simple-little-table {
 .my-table {
   width: 50%;
 }
+
+.my-table-grade {
+  padding-top: 20px;
+}
