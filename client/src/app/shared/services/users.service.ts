@@ -14,6 +14,8 @@ export class UsersService {
   // students: BehaviorSubject<Student[]> = new BehaviorSubject([]);
   users: BehaviorSubject<User[]> = new BehaviorSubject([]);
   groups: BehaviorSubject<string[]> = new BehaviorSubject([]);
+  subjects: BehaviorSubject<string[]> = new BehaviorSubject([]);
+  days: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
   constructor(
     private http: HttpClient
@@ -36,12 +38,17 @@ export class UsersService {
 
     const groups = usersData['groups'];
 
+    const subjects = usersData['subjects'];
+    const days = usersData['days'];
+
     users.push(...teachers);
     users.push(...students);
     // this.teachers.next(teachers);
     // this.students.next(students);
     this.users.next(users);
     this.groups.next(groups);
+    this.subjects.next(subjects);
+    this.days.next(days);
 
   }
 

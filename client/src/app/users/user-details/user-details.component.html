@@ -37,20 +37,21 @@
       <table class="simple-little-table" cellspacing='0'>
         <tr>
           <th>Предметы</th>
+          <th *ngFor="let day of days;">{{day}}</th>
         </tr>
-        <tr *ngFor="let subject of subj; let idx = index">
-          <td>{{subject}}</td>
-          <td *ngFor="let note of user.subjects[subject]">
-              {{note}}
+        <tr *ngFor="let subjIndex of subjectsIndex; let idx = index">
+          <td>{{subjects[subjIndex]}}</td>
+          <td *ngFor="let note of user.subjects[subjIndex]">
+            {{note}}
           </td>
         </tr>
       </table>
     </div>
-    <div *ngIf="role === 'Teacher' && user.groups">
+    <div *ngIf="role === 'Teacher' && user.group">
       
       <table
         mat-table
-        [dataSource]="user.groups"
+        [dataSource]="user.group"
         class="mat-elevation-z8"
       >
       

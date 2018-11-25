@@ -15,10 +15,13 @@ import { BehaviorSubject } from 'rxjs';
 export class UserDetailsComponent implements OnInit {
   id: number;
   user: Teacher | Student;
-  subj: string[];
+  subjectsIndex: string[];
+  subjects: string[];
+  subjectStudentArr: string[];
   displayedColumns: string[];
   displayedColumnsUser: string[];
   userRole: string;
+  days: string[];
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +35,12 @@ export class UserDetailsComponent implements OnInit {
     this.getUser();
     this.displayedColumnsUser = ['lastName', 'firstName', 'patronymic', 'role'];
     this.userRole = this.authService.isAdmin();
+    this.usersService.subjects.subscribe((subjectsData) => {
+      this.subjects = subjectsData;
+    });
+    this.usersService.days.subscribe((daysData) => {
+      this.days = daysData;
+    });
   }
 
   getUser(): void {
@@ -42,7 +51,7 @@ export class UserDetailsComponent implements OnInit {
         this.user = user;
         if (user.roles.indexOf('Student') !== -1) {
           if(this.user.subjects) {
-            this.subj = Object.keys(this.user.subjects);
+            this.subjectsIndex = Object.keys(this.user.subjects);
           }
         } else if (user.roles.indexOf('Teacher') !== -1) {
           this.displayedColumns = ['groups'];
