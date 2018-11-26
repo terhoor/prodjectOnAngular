@@ -36,6 +36,16 @@ export class AuthService {
     return this.userIs[Roles.Admin];
   }
 
+  isTeacher() {
+    return this.userIs[Roles.Teacher];
+  }
+
+  isStudent() {
+    return this.userIs[Roles.Student];
+  }
+
+
+
   authorized(admin = false) {
     /* if (admin) {
       return this.userIs[Roles.Admin];

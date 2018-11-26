@@ -7,6 +7,7 @@ import { AddPopupComponent } from '../shared/components/popup/add/add.component'
 import { DeletePopupComponent } from '../shared/components/popup/delete/delete.component';
 import { EditPopupComponent } from '../shared/components/popup/edit/edit.component';
 import { Router } from '@angular/router';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = ['id', 'lastName', 'firstName', 'patronymic', 'roles', 'actions'];
+  displayedColumns: string[] = ['id', 'lastName', 'firstName', 'patronymic', 'roles'];
   listUsers: MatTableDataSource<any>;
   users$;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -23,6 +24,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   constructor(
     private usersService: UsersService,
+    private authService: AuthService,
     public dialog: MatDialog,
     private router: Router
     ) {
@@ -34,10 +36,18 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.listUsers = new MatTableDataSource(dataUsers);
       this.refresh(/* this.listUsers */);
     });
+
+    if (this.accessEdit()) {
+      this.displayedColumns.push('actions');
+    }
   }
 
   ngOnDestroy() {
 
+  }
+
+  accessEdit() {
+    return this.authService.isAdmin() || this.authService.isTeacher();
   }
 
   addNew() {

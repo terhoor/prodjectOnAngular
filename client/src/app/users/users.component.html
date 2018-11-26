@@ -41,7 +41,7 @@
   </ng-container>
 
    <!-- actions -->
-   <ng-container matColumnDef="actions">
+   <ng-container matColumnDef="actions" *ngIf="accessEdit()">
     <th mat-header-cell *matHeaderCellDef>
       <button mat-icon-button color="primary" (click)="addNew()">
         <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>

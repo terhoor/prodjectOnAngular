@@ -64,19 +64,23 @@ export class UserDetailsComponent implements OnInit {
   }
 
   changeGrade(subIdx, idx) {
+    console.log(this.authService.userIs);
+    if (this.authService.isStudent()) {
+      return false;
+    }
 
-      const dialogRef = this.dialog.open(ChangeGradeComponent, {
-        width: '450px',
-        data: this.user.subjects[subIdx][idx]
-      });
-  
-      dialogRef.afterClosed().subscribe(grade => {
-        if (!!grade) {
-          this.user.subjects[subIdx][idx] = grade;
-          this.usersService.changeUserDb(this.user);
-        }
+    const dialogRef = this.dialog.open(ChangeGradeComponent, {
+      width: '450px',
+      data: this.user.subjects[subIdx][idx]
+    });
 
-      });
+    dialogRef.afterClosed().subscribe(grade => {
+      if (!!grade) {
+        this.user.subjects[subIdx][idx] = grade;
+        this.usersService.changeUserDb(this.user);
+      }
+
+    });
 
   }
 
