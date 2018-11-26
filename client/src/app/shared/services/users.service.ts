@@ -85,6 +85,7 @@ export class UsersService {
     this.http.get(`http://localhost:5000/api/data/users-delete/${id}`).subscribe();
   }
 
+
   findIndexUser(array, id) {
       const idx = array.findIndex((user) => {
         if (user.id === id) {

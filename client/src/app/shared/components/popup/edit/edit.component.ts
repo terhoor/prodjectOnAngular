@@ -42,7 +42,9 @@ export class EditPopupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     this.exampleUser = Object.assign({}, this.user);
+
     this.usersService.groups.subscribe((groups) => {
       this.groupsList = groups;
     });
@@ -64,21 +66,27 @@ export class EditPopupComponent implements OnInit {
   }
 
   onSubmit() {
-
     const newUser = Object.assign( this.user, this.formEdit.value);
+    const needSubj = this.formEdit.value.subjects || [];
 
     if (newUser.roles === Roles.Student) {
 
-      newUser.subjects.forEach(idxSubj => {
-        if (isArray(this.exampleUser.subjects[idxSubj])) {
-          newUser.subjects[idxSubj] = this.exampleUser.subjects[idxSubj];
-        } else {
-          newUser.subjects[idxSubj] = [' ', ' ', ' ', ' ', ' '];
-        }
-      });
+      newUser.subjects = {};
+        needSubj.forEach(idxSubj => {
+
+          if (!!this.exampleUser.subjects && isArray(this.exampleUser.subjects[idxSubj])) {
+            newUser.subjects[idxSubj] = this.exampleUser.subjects[idxSubj];
+          } else {
+            newUser.subjects[idxSubj] = [' ', ' ', ' ', ' ', ' '];
+          }
+        });
+
+
+      
     }
 
     newUser.roles = [newUser.roles];
+    console.log(newUser);
     this.dialogRef.close(newUser);
 
   }

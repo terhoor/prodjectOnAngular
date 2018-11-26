@@ -1,7 +1,7 @@
 <div class="box-close">
   <div class="close" (click)="onNoClick()">&#10006;</div>
 </div>
-<h2 mat-dialog-title>Создание пользователя</h2>
+<h2 mat-dialog-title>Изменение пользователя</h2>
 <div mat-dialog-content>
   <form [formGroup]="formEdit" (ngSubmit)="onSubmit()">
     <div class="input-field">
@@ -79,7 +79,7 @@
       </mat-form-field>
     </div>
 
-    <div class="input-field" [hidden]="!(formEdit.get('roles').value === 'Student')">
+    <div class="input-field" *ngIf="(formEdit.get('roles').value === 'Student')">
       <mat-form-field>
         <mat-select placeholder="Group" formControlName="group">
           <mat-option *ngFor="let group of groupsList" [value]="group">{{group}} </mat-option>
@@ -87,7 +87,7 @@
       </mat-form-field>
     </div>
 
-    <div class="input-field" [hidden]="!(formEdit.get('roles').value === 'Student')">
+    <div class="input-field" *ngIf="(formEdit.get('roles').value === 'Student')">
       <mat-form-field>
         <mat-select placeholder="Subjects" formControlName="subjects" multiple>
           <mat-option *ngFor="let subject of subjects; let idx = index" [value]="idx.toString()">{{subject}} </mat-option>
