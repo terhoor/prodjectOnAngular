@@ -79,7 +79,8 @@ export class UsersComponent implements OnInit, OnDestroy {
     });
   }
 
-  startEdit(i, user) {
+  startEdit(event: Event, user) {
+    event.stopPropagation();
     const dialogRef = this.dialog.open(EditPopupComponent, {
       width: '450px',
       data: user
@@ -106,7 +107,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.listUsers.sort = this.sort;
   }
 
-  showUser(id) {
+  showUser(id: number) {
     this.router.navigate(['/users', id]);
   }
 
