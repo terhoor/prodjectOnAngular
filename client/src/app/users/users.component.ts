@@ -17,7 +17,7 @@ import { AuthService } from '../shared/services/auth.service';
 export class UsersComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['id', 'lastName', 'firstName', 'patronymic', 'roles'];
   listUsers: MatTableDataSource<any>;
-  users$;
+  users$: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -34,7 +34,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.users$ = this.usersService.users.subscribe((dataUsers) => {
       this.listUsers = new MatTableDataSource(dataUsers);
-      this.refresh(/* this.listUsers */);
+      this.refresh();
     });
 
     if (this.accessEdit()) {
@@ -43,7 +43,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
+    this.users$.unsubscribe();
   }
 
   accessEdit() {
@@ -51,9 +51,18 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   addNew() {
-    this.dialog.open(AddPopupComponent, {
+    const dialogRef = this.dialog.open(AddPopupComponent, {
       width: '450px'
     });
+
+    dialogRef.afterClosed().subscribe(newUser => {
+      if (!!newUser) {
+        this.usersService.createNewUser(newUser).subscribe(() => {
+          this.refresh();
+        });
+      }
+    });
+
   }
 
   deleteUser(user) {
@@ -89,11 +98,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   private refreshTable(user) {
     const idx = this.usersService.findIndexUser(this.listUsers.data, user.id);
     this.listUsers.data.splice(idx, 1);
-    this.refresh(/* this.listUsers.data */);
+    this.refresh();
   }
 
-  private refresh(/* newData */) {
-    // this.listUsers = new MatTableDataSource(newData);
+  private refresh() {
     this.listUsers.paginator = this.paginator;
     this.listUsers.sort = this.sort;
   }

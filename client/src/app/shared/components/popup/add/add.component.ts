@@ -48,8 +48,8 @@ export class AddPopupComponent implements OnInit {
   onSubmit() {
     const newUser = this.formCreate.value;
     newUser.roles = [newUser.roles];
-    this.usersService.createNewUser(newUser);
-    this.dialogRef.close();
+    this.dialogRef.close(newUser);
+
 
   }
 }

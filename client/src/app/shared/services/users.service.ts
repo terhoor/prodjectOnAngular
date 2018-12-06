@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 
 import {Student} from '../models/student.model';
 import {Teacher} from '../models/teacher.model';
-import { BehaviorSubject, Observable  } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject  } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
+import { Roles } from '../roles';
 
 
 @Injectable()
@@ -70,10 +71,26 @@ export class UsersService {
   }));
 }
 
-  createNewUser(user) {
-    this.http.post('http://localhost:5000/api/data/users', user).subscribe(() => {
-      this.getUsers().subscribe(this.updateUsers.bind(this));
+  createNewUser(user): Observable<any> {
+    const subject = new Subject();
+    this.http.post('http://localhost:5000/api/data/users', user)
+      .subscribe((userWithId) => {
+        this.addUserAfterCreate(userWithId, this.users.getValue());
+        subject.next(true);
     });
+    return subject;
+  }
+
+  addUserAfterCreate(userWithId: any, WhereAdd: any) {
+    const role = userWithId.roles[0];
+    let newUser: any;
+    if (role === Roles.Teacher) {
+      newUser = new Teacher(userWithId);
+    } else if (role === Roles.Student) {
+      newUser = new Student(userWithId);
+    }
+
+    WhereAdd.push(newUser);
 
   }
 

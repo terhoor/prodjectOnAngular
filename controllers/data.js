@@ -76,7 +76,7 @@ module.exports.createUser = async function(req, res) {
   });
     
     
-    res.status(200).json("sss");
+    res.status(200).json(user);
   } catch(e) {
     errorHandler(res, e);
   }
