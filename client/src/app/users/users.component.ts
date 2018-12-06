@@ -65,7 +65,8 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   }
 
-  deleteUser(user) {
+  deleteUser(event: Event, user) {
+    event.stopPropagation();
     const dialogRef = this.dialog.open(DeletePopupComponent, {
       width: '450px',
       data: user
