@@ -8,14 +8,14 @@ import { AuthService } from './shared/services/auth.service';
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(
-    private auth: AuthService,
+    private authService: AuthService,
     private router: Router
     ) {
 
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    if (this.auth.authorized()) {
+    if (this.authService.authorized()) {
       return of(true);
     } else {
       return of(false);
