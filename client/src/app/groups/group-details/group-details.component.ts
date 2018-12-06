@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../shared/services/users.service';
 import { Student } from '../../shared/models/student.model';
 import { Observable } from 'rxjs';
+import { MatSort, MatTableDataSource } from '@angular/material';
 
 
 @Component({
@@ -11,9 +12,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./group-details.component.css']
 })
 export class GroupDetailsComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort;
 
   groupUsers$: Observable<Student[]>;
   groupName: string;
+  groupUsers: MatTableDataSource<Student>;
   displayedColumns: string[] = ['id', 'lastName', 'firstName', 'patronymic'];
 
   constructor(
@@ -28,6 +31,9 @@ export class GroupDetailsComponent implements OnInit {
   getGroup() {
     const name = this.route.snapshot.paramMap.get('name');
     this.groupName = name;
-    this.groupUsers$ = this.usersService.getByGroup(name);
+    this.usersService.getByGroup(name).subscribe(dataStud => {
+      this.groupUsers = new MatTableDataSource(dataStud);
+      this.groupUsers.sort = this.sort;
+    });
   }
 }

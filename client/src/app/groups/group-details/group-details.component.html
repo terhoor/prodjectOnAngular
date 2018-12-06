@@ -1,31 +1,31 @@
 <h2>Список студентов в группе {{groupName}}</h2>
 <table
-  mat-table 
+  mat-table
+  matSort
   class="mat-elevation-z8"
-  *ngIf="groupUsers$ | async as groupUsers; else loader"
   [dataSource]="groupUsers" 
 >
   <!-- id Column -->
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> id </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
     <td mat-cell *matCellDef="let user"> {{user.id}} </td>
   </ng-container>
   
   <!--  lastName Column -->
   <ng-container matColumnDef="lastName">
-    <th mat-header-cell *matHeaderCellDef> Фамилия </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Фамилия </th>
     <td mat-cell *matCellDef="let user"> {{user.lastName}} </td>
   </ng-container>
   
   <!--  firstName Column -->
   <ng-container matColumnDef="firstName">
-    <th mat-header-cell *matHeaderCellDef> Имя </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Имя </th>
     <td mat-cell *matCellDef="let user"> {{user.firstName}} </td>
   </ng-container>
 
   <!--  patronymic Column -->
   <ng-container matColumnDef="patronymic">
-    <th mat-header-cell *matHeaderCellDef> Отчество </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Отчество </th>
     <td mat-cell *matCellDef="let user"> {{user.patronymic}} </td>
   </ng-container>
 
